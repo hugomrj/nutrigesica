@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nutrigesica - Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+   
+        body { padding: 0 !important; margin: 0 !important; }
+    </style>
+</head>
+<body class="bg-[var(--bg-body)]">
+    <nav class="bg-[#0f172a] text-white px-8 py-4 flex items-center sticky top-0 z-50">
+        <div class="mr-10">
+            <span class="font-black tracking-tighter text-xl text-[var(--accent)]">NUTRIGESICA</span>
+        </div>
+        
+
+        <div class="flex space-x-10">
+            <a href="/dashboard" class="text-sm font-black uppercase tracking-[0.15em] text-white/90 hover:text-[var(--accent)] transition-all">
+                Dashboard
+            </a>
+            <a href="/pacientes" class="text-sm font-black uppercase tracking-[0.15em] text-white/90 hover:text-[var(--accent)] transition-all">
+                Pacientes
+            </a>
+            <a href="/config" class="text-sm font-black uppercase tracking-[0.15em] text-white/90 hover:text-[var(--accent)] transition-all">
+                Sistema
+            </a>
+        </div>
+
+
+
+    </nav>
+
+    <main class="w-full">
+        <%= yield %>
+    </main>
+</body>
+</html>

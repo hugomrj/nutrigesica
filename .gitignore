@@ -1,0 +1,13 @@
+# --- Dependencias (Crucial) ---
+# Ignoramos la carpeta vendor completa para no subir las gemas
+vendor/
+.bundle/
+Gemfile.lock # (Opcional: algunos prefieren subirlo, pero en proyectos minimalistas se puede ignorar)
+
+# --- Archivos de Sistema y Log ---
+*.log
+tmp/
+.DS_Store
+
+# --- Variables de Entorno (Seguridad) ---
+.env
