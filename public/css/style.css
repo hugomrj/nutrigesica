@@ -102,6 +102,25 @@ body {
 .badge-success { background: #dcfce7; color: #166534; }
 .badge-warning { background: #fef3c7; color: #92400e; }
 
+
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+}
+
+/* Ajuste para que el texto no se amontone en pantallas mínimas */
+@media (max-width: 768px) {
+    nav {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+
+
+
 /* ==========================================================================
    4. BOTONES
    ========================================================================== */
@@ -177,4 +196,106 @@ body {
     .view-wrapper { padding: 1rem; }
     .ui-table td, .ui-table th { padding: 12px 16px; }
     .btn-main { width: 100%; }
+}
+
+
+
+/* ==========================================================================
+   7. NAVEGACIÓN RESPONSIVE (Versión Final Limpia)
+   ========================================================================== */
+
+/* --- MÓVIL --- */
+#nav-menu {
+    display: none !important; /* Oculto por defecto */
+    flex-direction: column;
+    width: 100%;
+    background-color: #0f172a !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 9998;
+    padding: 20px;
+}
+
+/* Esta clase es la que activará el JS */
+#nav-menu.show-menu {
+    display: flex !important;
+}
+
+.nav-dropdown-content {
+    display: none;
+    background: rgba(255, 255, 255, 0.05);
+    width: 100%;
+}
+
+.nav-dropdown.open .nav-dropdown-content {
+    display: block !important;
+}
+
+/* --- DESKTOP --- */
+@media (min-width: 768px) {
+    #nav-menu {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row !important;
+        width: auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+    }
+
+    .nav-dropdown { position: relative; }
+
+    .nav-dropdown-content {
+        position: absolute !important;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        background: #1e293b !important;
+        z-index: 9999;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-dropdown:hover .nav-dropdown-content {
+        display: block !important;
+    }
+}
+
+/* Items */
+.nav-dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+}
+
+/* En Desktop, el menú de Sistema flota */
+@media (min-width: 768px) {
+    .group:hover .hidden {
+        display: block !important;
+    }
+    /* Puente para no perder el hover */
+    .group .hidden::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 100%;
+        height: 15px;
+    }
+}
+
+/* En Móvil, para que el dropdown de 'Sistema' se vea al tocar, 
+   usamos :focus o simplemente lo dejamos visible dentro del menú */
+@media (max-width: 767px) {
+    .group .hidden {
+        display: block !important; /* En móvil sale expandido por defecto al abrir el menú */
+        position: static;
+        background: rgba(255,255,255,0.03);
+        margin-top: 10px;
+    }
 }

@@ -1,0 +1,28 @@
+PROYECTO SINATRA
+================
+
+Descripción
+-----------
+Aplicación web desarrollada con Sinatra.
+
+Requisitos
+----------
+- Ruby 3.x
+- Bundler
+
+Instalación
+-----------
+1. Clonar el repositorio.
+2. Entrar al directorio del proyecto.
+3. Ejecutar:
+
+   bundle install
+
+Ejecución en desarrollo
+-----------------------
+Ejecutar el siguiente comando:
+
+   bundle exec ruby app.rb
+
+La aplicación estará disponible en:
+http://localhost:4567

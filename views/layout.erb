@@ -2,40 +2,57 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nutrigesica - Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="/css/style.css">
-    <style>
-   
-        body { padding: 0 !important; margin: 0 !important; }
-    </style>
 </head>
 <body class="bg-[var(--bg-body)]">
-    <nav class="bg-[#0f172a] text-white px-8 py-4 flex items-center sticky top-0 z-50">
-        <div class="mr-10">
-            <span class="font-black tracking-tighter text-xl text-[var(--accent)]">NUTRIGESICA</span>
-        </div>
+
+
+<nav class="bg-[#0f172a] text-white px-8 py-4 sticky top-0 z-50 flex items-center justify-between">
+    <span class="font-black tracking-tighter text-xl text-[var(--accent)]">NUTRIGESICA</span>
+
+    <input type="checkbox" id="menu-toggle-check" class="hidden peer">
+
+    <label for="menu-toggle-check" class="md:hidden flex flex-col space-y-1.5 border border-white/10 p-2 rounded cursor-pointer select-none">
+        <span class="w-5 h-0.5 bg-white"></span>
+        <span class="w-5 h-0.5 bg-white"></span>
+        <span class="w-5 h-0.5 bg-white"></span>
+    </label>
+
+    <div id="nav-menu" class="hidden md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-[#0f172a] md:bg-transparent p-6 md:p-0 peer-checked:flex md:space-x-10 border-t border-white/10 md:border-none">
+        <a href="/dashboard" class="text-sm font-black uppercase tracking-[0.15em] py-2">Dashboard</a>
+        <a href="/pacientes" class="text-sm font-black uppercase tracking-[0.15em] py-2">Pacientes</a>
         
-
-        <div class="flex space-x-10">
-            <a href="/dashboard" class="text-sm font-black uppercase tracking-[0.15em] text-white/90 hover:text-[var(--accent)] transition-all">
-                Dashboard
-            </a>
-            <a href="/pacientes" class="text-sm font-black uppercase tracking-[0.15em] text-white/90 hover:text-[var(--accent)] transition-all">
-                Pacientes
-            </a>
-            <a href="/config" class="text-sm font-black uppercase tracking-[0.15em] text-white/90 hover:text-[var(--accent)] transition-all">
-                Sistema
-            </a>
+        <div class="group relative">
+            <button class="text-sm font-black uppercase tracking-[0.15em] py-2 bg-transparent border-none text-white cursor-pointer outline-none">
+                Sistema ▼
+            </button>
+            <div class="hidden group-hover:block md:absolute md:right-0 md:top-full md:w-48 bg-[#1e293b] rounded-lg md:shadow-xl p-2">
+                <a href="/config" class="block px-4 py-2 text-[11px] font-bold uppercase hover:text-[var(--accent)]">Configuración</a>
+                <a href="/usuarios" class="block px-4 py-2 text-[11px] font-bold uppercase hover:text-[var(--accent)]">Usuarios</a>
+                <hr class="border-white/10 my-1">
+                <a href="/logout" class="block px-4 py-2 text-[11px] font-bold uppercase text-red-400">Salir</a>
+            </div>
         </div>
+    </div>
+</nav>
 
-
-
-    </nav>
 
     <main class="w-full">
         <%= yield %>
     </main>
+
+    <script>
+        // Lógica simple para mostrar/ocultar el menú en móviles
+        const btn = document.getElementById('menu-toggle');
+        const menu = document.getElementById('nav-menu');
+        
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 </html>
