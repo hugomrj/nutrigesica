@@ -201,12 +201,12 @@ body {
 
 
 /* ==========================================================================
-   7. NAVEGACIÓN RESPONSIVE (Versión Final Limpia)
+   7. NAVEGACIÓN RESPONSIVE (Corregida y unificada)
    ========================================================================== */
 
-/* --- MÓVIL --- */
+/* Estado inicial del menú en móvil: oculto */
 #nav-menu {
-    display: none !important; /* Oculto por defecto */
+    display: none !important;
     flex-direction: column;
     width: 100%;
     background-color: #0f172a !important;
@@ -215,24 +215,44 @@ body {
     left: 0;
     z-index: 9998;
     padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 0px; 
 }
 
-/* Esta clase es la que activará el JS */
+/* Clase para mostrar el menú en móvil (toggle con JS) */
 #nav-menu.show-menu {
     display: flex !important;
 }
 
+/* Dropdown contenedor */
+.nav-dropdown {
+    width: 100%;
+}
+
+/* Estilo del trigger (botón Sistema) */
+.nav-dropdown-trigger {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenido del dropdown: oculto por defecto */
 .nav-dropdown-content {
     display: none;
     background: rgba(255, 255, 255, 0.05);
     width: 100%;
+    margin-top: 8px;
+    border-radius: 8px;
 }
 
+/* Cuando el dropdown está abierto (clase .open en el contenedor) */
 .nav-dropdown.open .nav-dropdown-content {
     display: block !important;
 }
 
-/* --- DESKTOP --- */
+/* --- VISTA ESCRITORIO (min-width: 768px) --- */
 @media (min-width: 768px) {
     #nav-menu {
         display: flex !important;
@@ -241,9 +261,13 @@ body {
         width: auto !important;
         padding: 0 !important;
         background: transparent !important;
+        border-top: none;
     }
 
-    .nav-dropdown { position: relative; }
+    .nav-dropdown {
+        position: relative;
+        width: auto;
+    }
 
     .nav-dropdown-content {
         position: absolute !important;
@@ -255,14 +279,26 @@ body {
         margin-top: 10px;
         border-radius: 8px;
         border: 1px solid rgba(255,255,255,0.1);
+        display: none; /* sigue oculto hasta el hover */
     }
 
+    /* En desktop, se muestra al hacer hover sobre .nav-dropdown */
     .nav-dropdown:hover .nav-dropdown-content {
         display: block !important;
     }
+
+    /* Puente para no perder el hover */
+    .nav-dropdown-content::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 100%;
+        height: 15px;
+    }
 }
 
-/* Items */
+/* Estilos para los items del dropdown */
 .nav-dropdown-item {
     display: block;
     padding: 12px 20px;
@@ -273,29 +309,6 @@ body {
     text-decoration: none;
 }
 
-/* En Desktop, el menú de Sistema flota */
-@media (min-width: 768px) {
-    .group:hover .hidden {
-        display: block !important;
-    }
-    /* Puente para no perder el hover */
-    .group .hidden::before {
-        content: "";
-        position: absolute;
-        top: -15px;
-        left: 0;
-        width: 100%;
-        height: 15px;
-    }
-}
-
-/* En Móvil, para que el dropdown de 'Sistema' se vea al tocar, 
-   usamos :focus o simplemente lo dejamos visible dentro del menú */
-@media (max-width: 767px) {
-    .group .hidden {
-        display: block !important; /* En móvil sale expandido por defecto al abrir el menú */
-        position: static;
-        background: rgba(255,255,255,0.03);
-        margin-top: 10px;
-    }
+.nav-dropdown-item:hover {
+    color: var(--accent);
 }

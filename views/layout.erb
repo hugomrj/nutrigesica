@@ -6,53 +6,77 @@
     <title>Nutrigesica - Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/style.css"> <!-- tu archivo CSS existente -->
 </head>
 <body class="bg-[var(--bg-body)]">
 
+<nav class="bg-[#0f172a] text-white sticky top-0 z-50">
+    <div class="flex flex-wrap items-center justify-between md:flex-nowrap px-6 py-4">
+        <!-- Logo -->
+        <span class="font-black tracking-tighter text-xl text-[var(--accent)]">NUTRIGESICA</span>
 
-<nav class="bg-[#0f172a] text-white px-8 py-4 sticky top-0 z-50 flex items-center justify-between">
-    <span class="font-black tracking-tighter text-xl text-[var(--accent)]">NUTRIGESICA</span>
+        <!-- Botón hamburguesa (solo visible en móvil) -->
+        <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 border border-white/10 rounded">
+            <span class="w-5 h-0.5 bg-white block"></span>
+            <span class="w-5 h-0.5 bg-white block"></span>
+            <span class="w-5 h-0.5 bg-white block"></span>
+        </button>
 
-    <input type="checkbox" id="menu-toggle-check" class="hidden peer">
+        <!-- Menú principal -->
+        <div id="nav-menu" class="hidden md:flex md:flex-row md:items-center md:ml-auto md:gap-10 w-full md:w-auto mt-4 md:mt-0">
+            <a href="/dashboard" class="text-sm font-black uppercase tracking-widest py-2 block">Dashboard</a>
+            <a href="/pacientes" class="text-sm font-black uppercase tracking-widest py-2 block">Pacientes</a>
 
-    <label for="menu-toggle-check" class="md:hidden flex flex-col space-y-1.5 border border-white/10 p-2 rounded cursor-pointer select-none">
-        <span class="w-5 h-0.5 bg-white"></span>
-        <span class="w-5 h-0.5 bg-white"></span>
-        <span class="w-5 h-0.5 bg-white"></span>
-    </label>
-
-    <div id="nav-menu" class="hidden md:flex flex-col md:flex-row absolute md:relative top-full left-0 w-full md:w-auto bg-[#0f172a] md:bg-transparent p-6 md:p-0 peer-checked:flex md:space-x-10 border-t border-white/10 md:border-none">
-        <a href="/dashboard" class="text-sm font-black uppercase tracking-[0.15em] py-2">Dashboard</a>
-        <a href="/pacientes" class="text-sm font-black uppercase tracking-[0.15em] py-2">Pacientes</a>
-        
-        <div class="group relative">
-            <button class="text-sm font-black uppercase tracking-[0.15em] py-2 bg-transparent border-none text-white cursor-pointer outline-none">
-                Sistema ▼
-            </button>
-            <div class="hidden group-hover:block md:absolute md:right-0 md:top-full md:w-48 bg-[#1e293b] rounded-lg md:shadow-xl p-2">
-                <a href="/config" class="block px-4 py-2 text-[11px] font-bold uppercase hover:text-[var(--accent)]">Configuración</a>
-                <a href="/usuarios" class="block px-4 py-2 text-[11px] font-bold uppercase hover:text-[var(--accent)]">Usuarios</a>
-                <hr class="border-white/10 my-1">
-                <a href="/logout" class="block px-4 py-2 text-[11px] font-bold uppercase text-red-400">Salir</a>
+            <!-- Dropdown Sistema -->
+            <div class="nav-dropdown relative">
+                <button class="nav-dropdown-trigger text-sm font-black uppercase tracking-widest py-2 bg-transparent border-none text-white cursor-pointer text-left w-full flex items-center justify-between">
+                    Sistema <span class="ml-1">▼</span>
+                </button>
+                <div class="nav-dropdown-content hidden p-2 bg-[#1e293b]">
+                    <a href="/config" class="block px-4 py-2 text-xs font-bold uppercase hover:text-[var(--accent)]">Configuración</a>
+                    <a href="/usuarios" class="block px-4 py-2 text-xs font-bold uppercase hover:text-[var(--accent)]">Usuarios</a>
+                    <hr class="border-white/10 my-1">
+                    <a href="/logout" class="block px-4 py-2 text-xs font-bold uppercase text-red-400">Salir</a>
+                </div>
             </div>
         </div>
     </div>
 </nav>
 
+<script>
+    (function() {
+        // Toggle del menú móvil
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
 
-    <main class="w-full">
-        <%= yield %>
-    </main>
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('show-menu');
+            });
+        }
 
-    <script>
-        // Lógica simple para mostrar/ocultar el menú en móviles
-        const btn = document.getElementById('menu-toggle');
-        const menu = document.getElementById('nav-menu');
-        
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
+        // Toggle del dropdown "Sistema" (solo útil en móvil)
+        const dropdownTriggers = document.querySelectorAll('.nav-dropdown-trigger');
+        dropdownTriggers.forEach(trigger => {
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const dropdown = this.closest('.nav-dropdown');
+                if (dropdown) {
+                    dropdown.classList.toggle('open');
+                }
+            });
         });
-    </script>
+
+        // Cerrar dropdown al hacer clic fuera (opcional)
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-dropdown')) {
+                document.querySelectorAll('.nav-dropdown.open').forEach(d => {
+                    d.classList.remove('open');
+                });
+            }
+        });
+    })();
+</script>
+
 </body>
 </html>

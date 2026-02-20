@@ -56,6 +56,11 @@ post '/login' do
   end
 end
 
+get '/logout' do
+  session.clear # Borra todos los datos de la sesión
+  redirect '/login'
+end
+
 
 
 # Ruta exclusiva para el Dashboard
