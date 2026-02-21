@@ -6,7 +6,7 @@ Dotenv.load
 
 # Configuración usando las variables de entorno
 DB = Sequel.connect(
-  adapter:  'postgres',
+  adapter:  'postgres', 
   user:     ENV['DATABASE_USER'],
   password: ENV['DATABASE_PASSWORD'],
   host:     ENV['DATABASE_HOST'],
@@ -14,3 +14,6 @@ DB = Sequel.connect(
   database: ENV['DATABASE_NAME']
 )
 
+
+DB.extension(:pagination) 
+Sequel::Model.plugin :dataset_associations

@@ -1,0 +1,83 @@
+<div class="p-6">
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        <div>
+            <h1 class="text-2xl font-black tracking-tighter text-slate-800 uppercase">Listado de Pacientes</h1>
+            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Base de datos centralizada</p>
+        </div>
+        
+        <a href="/pacientes/nuevo" class="bg-slate-900 text-white px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-100">
+            Nuevo Registro
+        </a>
+    </div>
+
+    <div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200">
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400 w-16 text-center">ID</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Paciente</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Contacto</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Ubicación</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <% @pacientes_ds.each do |paciente| %>
+                    <tr class="hover:bg-slate-50/50 transition-colors">
+                        <td class="p-4 text-xs font-bold text-slate-300 text-center">#<%= paciente.id_paciente %></td>
+                        <td class="p-4">
+                            <div class="text-sm font-bold text-slate-700 uppercase tracking-tight">
+                                <%= paciente.nombres %> <%= paciente.apellidos %>
+                            </div>
+                            <div class="text-[10px] text-slate-400 font-semibold italic">
+                                <%= paciente.ocupacion || 'Sin ocupación' %>
+                            </div>
+                        </td>
+                        <td class="p-4">
+                            <div class="text-xs font-bold text-slate-600"><%= paciente.celular %></div>
+                            <div class="text-[10px] text-blue-500 font-medium"><%= paciente.email %></div>
+                        </td>
+                        <td class="p-4">
+                            <div class="text-xs text-slate-600 font-semibold"><%= paciente.ciudad %></div>
+                            <div class="text-[10px] text-slate-400 uppercase tracking-tighter"><%= paciente.barrio %></div>
+                        </td>
+                        <td class="p-4 text-right">
+                            <div class="flex justify-end gap-4">
+                                <a href="/pacientes/<%= paciente.id_paciente %>/editar" class="text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-800">
+                                    Editar
+                                </a>
+                                <form action="/pacientes/<%= paciente.id_paciente %>/eliminar" method="POST" class="inline" onsubmit="return confirm('¿Confirmar eliminación?')">
+                                    <button type="submit" class="text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-600">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    <% end %>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="bg-slate-50 p-4 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
+            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                Página <%= @pacientes_ds.current_page %> de <%= @pacientes_ds.page_count %>
+            </span>
+
+            <div class="flex border border-slate-200 bg-white shadow-sm">
+                <% unless @pacientes_ds.first_page? %>
+                    <a href="/pacientes?page=<%= @pacientes_ds.current_page - 1 %>" class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50 border-r border-slate-200">
+                        Anterior
+                    </a>
+                <% end %>
+
+                <% unless @pacientes_ds.last_page? %>
+                    <a href="/pacientes?page=<%= @pacientes_ds.current_page + 1 %>" class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50">
+                        Siguiente
+                    </a>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>

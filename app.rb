@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require_relative 'models/user'
+
+Dir["./models/*.rb"].each { |file| require file }
+
 
 # Configuraciones
 set :root, File.dirname(__FILE__)
@@ -60,6 +62,33 @@ get '/logout' do
   session.clear # Borra todos los datos de la sesión
   redirect '/login'
 end
+
+
+
+# Listado
+get '/pacientes' do
+  page = (params[:page] || 1).to_i
+  @pacientes_ds = Paciente.dataset.extension(:pagination).paginate(page, 10)
+  
+  # PRUEBA DE DEPURACIÓN:
+  puts "Cantidad de pacientes: #{@pacientes_ds.count}" 
+  
+  erb :"pacientes/index"
+end
+
+
+# Formulario Nuevo
+get '/pacientes/nuevo' do
+  erb :"pacientes/new"
+end
+
+# Editar (Cargando el paciente)
+get '/pacientes/:id/editar' do
+  @paciente = Paciente[params[:id]]
+  erb :"pacientes/edit"
+end
+
+
 
 
 

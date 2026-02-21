@@ -1,0 +1,9 @@
+<div class="p-6 max-w-5xl mx-auto">
+    <h1 class="text-2xl font-black uppercase mb-8">Editar Paciente</h1>
+    <form action="/pacientes/<%= @paciente.id_paciente %>/actualizar" method="POST" class="bg-white border p-8 shadow-sm">
+        <%= erb :"pacientes/_form" %>
+        <div class="mt-8 text-right">
+            <button type="submit" class="bg-blue-600 text-white px-10 py-4 text-xs font-black uppercase tracking-widest">Guardar Cambios</button>
+        </div>
+    </form>
+</div>

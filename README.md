@@ -23,6 +23,19 @@ cd nutrigesica
 ```
 2. Configurar la versión de Ruby
 ```bash
+
+sudo apt update && sudo apt install -y build-essential libssl-dev libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev libgdbm6 libgdbm-dev git curl
+
+# Clonar rbenv y ruby-build
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+
+# Configurar variables de entorno automáticamente
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+
+
 rbenv install 3.2.3
 rbenv local 3.2.3
 ```
