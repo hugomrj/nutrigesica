@@ -1,0 +1,313 @@
+/* ==========================================================================
+   1. VARIABLES - Sistema "Vitality Mint & Marine" (Optimized)
+   ========================================================================== */
+   :root {
+    --primary: #0f766e;            
+    --accent: #10b981;             
+    --accent-hover: #059669;        
+    
+    --bg-body: #f8fafc;            
+    --card-bg: #ffffff;
+    --border-color: #e2e8f0;           
+
+    --text-main: #1e293b;          
+    --text-muted: #64748b;         
+    --success: #22c55e;     
+    --error: #ef4444;       
+    --warning: #f59e0b;        
+
+    --radius-lg: 16px; /* Un poco más redondo para Urbanist */
+    --radius-md: 10px;
+    --shadow-sm: 0 4px 6px -1px rgba(15, 118, 110, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    
+    --font-main: 'Urbanist', sans-serif;
+}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: var(--font-main);
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.02em; /* Urbanist brilla más con tracking negativo */
+}
+
+/* ==========================================================================
+   3. COMPONENTES (Mejorados)
+   ========================================================================== */
+.view-wrapper {
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ui-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: box-shadow 0.3s ease;
+}
+
+.ui-card:hover {
+    box-shadow: 0 10px 15px -3px rgba(15, 118, 110, 0.08);
+}
+
+.ui-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-variant-numeric: tabular-nums; /* Mejora la lectura de números/calorías */
+}
+
+.ui-table th {
+    background: #f8fafc;
+    padding: 14px 24px;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.ui-table td {
+    padding: 18px 24px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.ui-table tr:last-child td { border-bottom: none; }
+
+.ui-table tr:hover td { 
+    background: #f0fdfa; 
+    color: var(--primary);
+}
+
+/* Status Badges - Nuevo detalle clínico */
+.badge {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.badge-success { background: #dcfce7; color: #166534; }
+.badge-warning { background: #fef3c7; color: #92400e; }
+
+
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+}
+
+/* Ajuste para que el texto no se amontone en pantallas mínimas */
+@media (max-width: 768px) {
+    nav {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+
+
+
+
+/* ==========================================================================
+   4. BOTONES
+   ========================================================================== */
+.btn-main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 28px;
+    border-radius: var(--radius-md);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-main:hover {
+    background-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(16, 185, 129, 0.4);
+}
+
+
+/* ==========================================================================
+   5. FORMULARIOS (Dimensiones Originales + Label Legible)
+   ========================================================================== */
+   .input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; 
+    margin-bottom: 1.25rem;
+}
+
+.input-group label {
+    font-size: 0.85rem;     /* Un equilibrio: más legible que antes, pero sin ser gigante */
+    font-weight: 600;       /* Menos grosor para que no se "empaste" la letra */
+    color: var(--text-main);/* Color sólido para que se lea bien */
+    text-transform: none;   /* Lectura natural (No todo en mayúsculas) */
+    letter-spacing: 0;
+}
+
+.input-control {
+    width: 100%;
+    padding: 12px 14px;     /* Volvemos a tu medida original */
+    border: 1px solid var(--border-color) !important;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;      /* Volvemos a tu medida original */
+    font-family: var(--font-main);
+    outline: none;
+    transition: all 0.2s;
+}
+
+.input-control:focus {
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+
+
+/* ==========================================================================
+   6. ANIMACIONES
+   ========================================================================== */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 640px) {
+    .view-wrapper { padding: 1rem; }
+    .ui-table td, .ui-table th { padding: 12px 16px; }
+    .btn-main { width: 100%; }
+}
+
+
+/* ==========================================================================
+   7. NAVEGACIÓN RESPONSIVE (Corregida y unificada)
+   ========================================================================== */
+
+/* Estado inicial del menú en móvil: oculto */
+#nav-menu {
+    display: none !important;
+    flex-direction: column;
+    width: 100%;
+    background-color: #0f172a !important;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 9998;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 0px; 
+}
+
+/* Clase para mostrar el menú en móvil (toggle con JS) */
+#nav-menu.show-menu {
+    display: flex !important;
+}
+
+/* Dropdown contenedor */
+.nav-dropdown {
+    width: 100%;
+}
+
+/* Estilo del trigger (botón Sistema) */
+.nav-dropdown-trigger {
+    width: 100%;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenido del dropdown: oculto por defecto */
+.nav-dropdown-content {
+    display: none;
+    background: rgba(255, 255, 255, 0.05);
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 8px;
+}
+
+/* Cuando el dropdown está abierto (clase .open en el contenedor) */
+.nav-dropdown.open .nav-dropdown-content {
+    display: block !important;
+}
+
+/* --- VISTA ESCRITORIO (min-width: 768px) --- */
+@media (min-width: 768px) {
+    #nav-menu {
+        display: flex !important;
+        position: static !important;
+        flex-direction: row !important;
+        width: auto !important;
+        padding: 0 !important;
+        background: transparent !important;
+        border-top: none;
+    }
+
+    .nav-dropdown {
+        position: relative;
+        width: auto;
+    }
+
+    .nav-dropdown-content {
+        position: absolute !important;
+        top: 100%;
+        right: 0;
+        width: 200px;
+        background: #1e293b !important;
+        z-index: 9999;
+        margin-top: 10px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.1);
+        display: none; /* sigue oculto hasta el hover */
+    }
+
+    /* En desktop, se muestra al hacer hover sobre .nav-dropdown */
+    .nav-dropdown:hover .nav-dropdown-content {
+        display: block !important;
+    }
+
+    /* Puente para no perder el hover */
+    .nav-dropdown-content::before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        left: 0;
+        width: 100%;
+        height: 15px;
+    }
+}
+
+/* Estilos para los items del dropdown */
+.nav-dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+}
+
+.nav-dropdown-item:hover {
+    color: var(--accent);
+}

@@ -6,15 +6,18 @@
     <title>Nutrigesica - Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link rel="stylesheet" href="/css/style.css"> <!-- tu archivo CSS existente -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/css/style.css"> 
 </head>
 <body class="bg-[var(--bg-body)]">
 
-<nav class="bg-[var(--secondary)] text-white sticky top-0 z-50">
-    <div class="flex items-center justify-between px-6 py-4 max-w-7xl mx-auto relative">
-        
+<nav class="bg-[#0f172a] text-white sticky top-0 z-50">
+
+
+    <div class="flex flex-wrap items-center justify-between md:flex-nowrap px-6 py-4">
+
         <span class="font-black tracking-tighter text-xl text-[var(--accent)]">NUTRIGESICA</span>
+
 
         <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 border border-white/10 rounded">
             <span class="w-5 h-0.5 bg-white block"></span>
@@ -22,29 +25,33 @@
             <span class="w-5 h-0.5 bg-white block"></span>
         </button>
 
-        <div id="nav-menu">
-            <a href="/pacientes" class="text-sm font-black uppercase tracking-widest py-2 hover:text-[var(--accent)]">Pacientes</a>
+        <div id="nav-menu" class="hidden md:flex md:flex-row md:items-center md:ml-auto md:gap-10 w-full md:w-auto mt-4 md:mt-0">
+           
+            <!--
+            <a href="/dashboard" class="text-sm font-black uppercase tracking-widest py-2 block hover:text-[var(--accent)]">Dashboard</a>
+            -->
+            
+            <a href="/pacientes" class="text-sm font-black uppercase tracking-widest py-2 block hover:text-[var(--accent)]">Pacientes</a>
 
+
+            <!--
             <div class="nav-dropdown relative">
-                <button class="nav-dropdown-trigger text-sm font-black uppercase tracking-widest py-2 flex items-center gap-2 bg-transparent border-none text-white cursor-pointer">
-                    Sistema <span class="text-[8px] opacity-60">▼</span>
+                <button class="nav-dropdown-trigger text-sm font-black uppercase tracking-widest py-2 bg-transparent border-none text-white cursor-pointer text-left w-full flex items-center justify-between hover:text-[var(--accent)]">
+                    Sistema <span class="ml-1">▼</span>
                 </button>
-                <div class="nav-dropdown-content">
-                    <a href="/config" class="block px-4 py-3 text-xs font-bold uppercase hover:bg-white/5 hover:text-[var(--accent)]">Configuración</a>
-                    <a href="/usuarios" class="block px-4 py-3 text-xs font-bold uppercase hover:bg-white/5 hover:text-[var(--accent)]">Usuarios</a>
+                <div class="nav-dropdown-content hidden p-2 bg-[#1e293b]">
+                    <a href="/config" class="block px-4 py-2 text-xs font-bold uppercase hover:text-[var(--accent)]">Configuración</a>
+                    <a href="/usuarios" class="block px-4 py-2 text-xs font-bold uppercase hover:text-[var(--accent)]">Usuarios</a>
                 </div>
             </div>
+            -->
 
-            <a href="/logout" class="text-sm font-black uppercase tracking-widest py-2 text-red-400 hover:text-red-300">
+            <a href="/logout" class="text-sm font-black uppercase tracking-widest py-2 block text-red-400 hover:text-red-300 transition-colors">
                 Salir
             </a>
         </div>
     </div>
 </nav>
-
-<main class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
-    <%= yield %>
-</main>
 
 <script>
     (function() {

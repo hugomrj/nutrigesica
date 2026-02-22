@@ -1,54 +1,65 @@
-<div class="p-6">
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+<div class="space-y-6 max-w-6xl mx-auto">
+
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
         <div>
-            <h1 class="text-2xl font-black tracking-tighter text-slate-800 uppercase">Listado de Pacientes</h1>
-            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Base de datos centralizada</p>
+            <h3>Listado de Pacientes</h3>
         </div>
-        
-        <a href="/pacientes/nuevo" class="bg-slate-900 text-white px-6 py-3 text-xs font-black uppercase tracking-widest hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-100">
+        <a href="/pacientes/nuevo" class="btn btn-primary">
             Nuevo Registro
         </a>
     </div>
 
-    <div class="bg-white border border-slate-200 shadow-sm overflow-hidden">
+    <div class="ui-card !p-0 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left border-collapse">
                 <thead>
-                    <tr class="bg-slate-50 border-b border-slate-200">
-                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400 w-16 text-center">ID</th>
-                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Paciente</th>
-                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Contacto</th>
-                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Ubicación</th>
-                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">Acciones</th>
+                    <tr class="bg-[var(--bg-body)] border-b border-[var(--border-color)]">
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] w-16 text-center">ID</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Paciente</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Contacto</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Ubicación</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-right">Acciones</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-100">
+                <tbody class="divide-y divide-[var(--border-color)]">
+                
+                    <% if @pacientes_ds.empty? %>
+                    <tr>
+                        <td colspan="5" class="py-20 text-center">
+                            <h5 class="text-[var(--text-muted)]">No hay pacientes registrados aún</h5>
+                            <p class="text-xs text-[var(--text-muted)] opacity-60">Usa el botón "Nuevo Registro" para empezar</p>
+                        </td>
+                    </tr>
+                    <% end %>
+
                     <% @pacientes_ds.each do |paciente| %>
-                    <tr class="hover:bg-slate-50/50 transition-colors">
-                        <td class="p-4 text-xs font-bold text-slate-300 text-center">#<%= paciente.id_paciente %></td>
+                    <tr class="hover:bg-[var(--bg-body)]/50 transition-colors">
+                        <td class="p-4 text-xs font-bold text-[var(--border-color)] text-center">
+                            #<%= paciente.id_paciente %>
+                        </td>
                         <td class="p-4">
-                            <div class="text-sm font-bold text-slate-700 uppercase tracking-tight">
+                            <div class="text-sm font-bold text-[var(--text-main)] uppercase tracking-tight">
                                 <%= paciente.nombres %> <%= paciente.apellidos %>
                             </div>
-                            <div class="text-[10px] text-slate-400 font-semibold italic">
+                            <div class="text-[10px] text-[var(--text-muted)] font-semibold italic">
                                 <%= paciente.ocupacion || 'Sin ocupación' %>
                             </div>
                         </td>
                         <td class="p-4">
-                            <div class="text-xs font-bold text-slate-600"><%= paciente.celular %></div>
-                            <div class="text-[10px] text-blue-500 font-medium"><%= paciente.email %></div>
+                            <div class="text-xs font-bold text-[var(--text-main)]"><%= paciente.celular %></div>
+                            <div class="text-[10px] text-[var(--tertiary)] font-medium"><%= paciente.email %></div>
                         </td>
                         <td class="p-4">
-                            <div class="text-xs text-slate-600 font-semibold"><%= paciente.ciudad %></div>
-                            <div class="text-[10px] text-slate-400 uppercase tracking-tighter"><%= paciente.barrio %></div>
+                            <div class="text-xs text-[var(--text-main)] font-semibold"><%= paciente.ciudad %></div>
+                            <div class="text-[10px] text-[var(--text-muted)] uppercase tracking-tighter"><%= paciente.barrio %></div>
                         </td>
                         <td class="p-4 text-right">
-                            <div class="flex justify-end gap-4">
-                                <a href="/pacientes/<%= paciente.id_paciente %>/editar" class="text-[10px] font-black uppercase tracking-widest text-blue-600 hover:text-blue-800">
+                            <div class="flex justify-end gap-3">
+                                <a href="/pacientes/<%= paciente.id_paciente %>/editar" class="btn btn-ghost !min-width-0 !px-3 !py-1 text-[10px]">
                                     Editar
                                 </a>
                                 <form action="/pacientes/<%= paciente.id_paciente %>/eliminar" method="POST" class="inline" onsubmit="return confirm('¿Confirmar eliminación?')">
-                                    <button type="submit" class="text-[10px] font-black uppercase tracking-widest text-red-400 hover:text-red-600">
+                                    <button type="submit" class="btn btn-ghost !text-[var(--error)] !min-width-0 !px-3 !py-1 text-[10px]">
                                         Eliminar
                                     </button>
                                 </form>
@@ -60,20 +71,20 @@
             </table>
         </div>
 
-        <div class="bg-slate-50 p-4 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4">
-            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">
+        <div class="bg-[var(--bg-body)] p-4 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-4">
+            <span class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">
                 Página <%= @pacientes_ds.current_page %> de <%= @pacientes_ds.page_count %>
             </span>
 
-            <div class="flex border border-slate-200 bg-white shadow-sm">
+            <div class="flex rounded-lg overflow-hidden border border-[var(--border-color)] bg-white">
                 <% unless @pacientes_ds.first_page? %>
-                    <a href="/pacientes?page=<%= @pacientes_ds.current_page - 1 %>" class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50 border-r border-slate-200">
+                    <a href="/pacientes?page=<%= @pacientes_ds.current_page - 1 %>" class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-[var(--text-main)] hover:bg-[var(--border-color)] border-r border-[var(--border-color)] transition-colors">
                         Anterior
                     </a>
                 <% end %>
 
                 <% unless @pacientes_ds.last_page? %>
-                    <a href="/pacientes?page=<%= @pacientes_ds.current_page + 1 %>" class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-slate-600 hover:bg-slate-50">
+                    <a href="/pacientes?page=<%= @pacientes_ds.current_page + 1 %>" class="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-[var(--text-main)] hover:bg-[var(--border-color)] transition-colors">
                         Siguiente
                     </a>
                 <% end %>

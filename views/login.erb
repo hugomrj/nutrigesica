@@ -1,33 +1,40 @@
-<div class="w-full max-w-md p-6">
+<div class="w-full max-w-md p-6"> 
     <div class="ui-card p-6 md:p-10">
-        <div class="text-center mb-10">
-            <h1 class="text-2xl font-black tracking-tight uppercase text-[var(--primary)]">Acceso</h1>
-            <p class="text-[9px] font-bold text-[var(--text-muted)] uppercase tracking-[0.25em] mt-1">
-                Portal de Gestión Segura
-            </p>
+
+        <div class="text-center mb-4">
+            <h1 class="text-[var(--primary)] font-bold">Acceso</h1>
+            <h5>Autenticación de Usuario</h5>
         </div>
 
-
-        <form action="/login" method="POST" class="space-y-4">
-            <div class="input-group">
-                <label>Usuario de acceso</label>
-                <input type="text" name="username" required class="input-control" autofocus>
-            </div>
+        <form action="/login" method="POST" > 
             
-            <div class="input-group">
-                <label>Contraseña</label>
-                <input type="password" name="password" required class="input-control" placeholder="••••••••">
-            </div>
+            <fieldset class="space-y-6">
+                <legend class="sr-only">Datos de acceso</legend>
+                
+                
+                <div class="input-group">
+                    <label>Usuario de acceso</label>
+                    <input type="text" name="username" required class="input-control">
+                </div>
+            
+                <div class="input-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="password" required class="input-control">
+                </div>
+            
+            </fieldset>
 
             <% if @error %>
-                <div class="text-[var(--error)] text-[10px] font-bold text-center min-h-[24px] uppercase tracking-wider">
+                <div class="error-message">
                     <%= @error %>
                 </div>
             <% end %>
 
-            <button type="submit" class="btn-main w-full py-4 mt-4 text-sm tracking-widest">
+            <button type="submit" class="btn btn-primary w-full mt-8">
                 INGRESAR AL SISTEMA
             </button>
+
+
         </form>
     </div>
     
