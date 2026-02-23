@@ -39,6 +39,8 @@ exec $SHELL
 rbenv install 3.2.3
 rbenv local 3.2.3
 ```
+
+
 3. Instalar dependencias
 gem install bundler
 ```bash

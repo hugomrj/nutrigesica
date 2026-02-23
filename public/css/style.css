@@ -243,30 +243,36 @@ h6 {
 /* ==========================================================================
    6. COMPONENTES: TABLAS & BADGES (Nutrigesica Standard)
    ========================================================================== */
-   .ui-table {
+.ui-table {
     width: 100%;
     border-collapse: collapse;
     background: white; /* Aseguramos fondo blanco */
 }
 
-.ui-table th {
-    background: #f8fafc;
-    padding: 14px 24px;
-    text-align: left;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    color: var(--text-muted);
-    border-bottom: 2px solid var(--border-color);
-    letter-spacing: 0.05em;
+.ui-table td {
+    padding: 18px 24px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-main);
+    vertical-align: middle;
 }
 
 .ui-table td {
     padding: 18px 24px;
-    font-size: 0.9rem;
+
+    font-size: 1rem;          /* 16px base */
+    line-height: 1.5;         /* MUY importante */
+    font-weight: 400;         /* evita light */
+
+    color: #1f2937;           /* gris oscuro sólido */
+    
     border-bottom: 1px solid var(--border-color);
-    color: var(--text-main);
     vertical-align: middle;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 /* El toque final: un hover sutil */
@@ -275,20 +281,60 @@ h6 {
     transition: background 0.2s ease;
 }
 
-/* Tus Badges están perfectos, solo añadimos la lógica de colores */
-.badge {
-    padding: 4px 12px;
-    border-radius: 99px;
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    display: inline-block;
-    white-space: nowrap;
+
+
+.table-actions {
+    text-align: right;
 }
 
-.badge-success { background: #dcfce7; color: #166534; }
-.badge-primary { background: var(--primary); color: white; opacity: 0.9; }
-.badge-muted   { background: #f1f5f9; color: var(--text-muted); }
+.table-actions-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Base exclusiva para acciones dentro de tabla */
+.table-action {
+    display: inline-flex;          /* Igual comportamiento */
+    align-items: center;           /* Centrado vertical */
+    justify-content: center;
+
+    min-width: 60px;               /* Fuerza mismo ancho mínimo */
+    height: 32px;                  /* Altura fija armoniosa */
+
+    padding: 0 10px;               /* Solo horizontal */
+    font-size: 0.75rem;
+    font-weight: 600;
+    
+    border-radius: 6px;
+    border: 1px solid transparent;
+    text-decoration: none;
+    cursor: pointer;
+
+    line-height: 1;                /* Evita diferencias */
+}
+
+/* Variantes */
+.table-action-edit {
+    background: #f1f5f9;
+    color: #1f2937;
+}
+
+.table-action-edit:hover {
+    background: #e2e8f0;
+}
+
+.table-action-delete {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.table-action-delete:hover {
+    background: #fecaca;
+}
+
+
+
 
 
 

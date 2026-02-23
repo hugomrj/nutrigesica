@@ -29,12 +29,74 @@
                    required
                    class="input-control">
         </div>
+
+        <div class="input-group">
+            <label>Edad</label>
+            <input type="number" name="edad"
+                   value="<%= @paciente&.edad %>"
+                   class="input-control">
+        </div>
+
+        <div class="input-group">
+            <label>Estado Civil</label>
+            <input type="text" name="estado_civil"
+                   value="<%= @paciente&.estado_civil %>"
+                   class="input-control">
+        </div>
     </fieldset>
 
-    <!-- 02. Contacto -->
+    <!-- 02. Profesional -->
     <fieldset class="space-y-6">
         <legend class="text-[var(--tertiary)]">
-            02. Contacto
+            02. Profesional
+        </legend>
+
+        <div class="input-group">
+            <label>Ocupación</label>
+            <input type="text" name="ocupacion"
+                   value="<%= @paciente&.ocupacion %>"
+                   class="input-control">
+        </div>
+
+        <div class="input-group">
+            <label>Horario Laboral</label>
+            <input type="text" name="horario_laboral"
+                   value="<%= @paciente&.horario_laboral %>"
+                   class="input-control">
+        </div>
+    </fieldset>
+
+    <!-- 03. Ubicación -->
+    <fieldset class="space-y-6">
+        <legend class="text-[var(--tertiary)]">
+            03. Ubicación
+        </legend>
+
+        <div class="input-group">
+            <label>Dirección</label>
+            <textarea name="direccion"
+                      class="input-control"><%= @paciente&.direccion %></textarea>
+        </div>
+
+        <div class="input-group">
+            <label>Ciudad</label>
+            <input type="text" name="ciudad"
+                   value="<%= @paciente&.ciudad %>"
+                   class="input-control">
+        </div>
+
+        <div class="input-group">
+            <label>Barrio</label>
+            <input type="text" name="barrio"
+                   value="<%= @paciente&.barrio %>"
+                   class="input-control">
+        </div>
+    </fieldset>
+
+    <!-- 04. Contacto -->
+    <fieldset class="space-y-6">
+        <legend class="text-[var(--tertiary)]">
+            04. Contacto
         </legend>
 
         <div class="input-group">

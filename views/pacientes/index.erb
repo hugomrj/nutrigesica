@@ -10,70 +10,105 @@
     </div>
 
     <div class="ui-card !p-0 overflow-hidden">
-        <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse">
+        <div class="overflow-x-auto">            
+            <table class="ui-table w-full">
+
+
                 <thead>
                     <tr class="bg-[var(--bg-body)] border-b border-[var(--border-color)]">
-                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] w-16 text-center">ID</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-center w-16">ID</th>
                         <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Paciente</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-center">Edad</th>
                         <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Contacto</th>
-                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Ubicación</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Ciudad</th>
                         <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-right">Acciones</th>
                     </tr>
                 </thead>
-                
-                <tbody class="divide-y divide-[var(--border-color)]">
-                
-                    <% if @pacientes_ds.empty? %>
-                    <tr>
-                        <td colspan="5" class="py-20 text-center">
-                            <h5 class="text-[var(--text-muted)]">No hay pacientes registrados aún</h5>
-                            <p class="text-xs text-[var(--text-muted)] opacity-60">Usa el botón "Nuevo Registro" para empezar</p>
-                        </td>
-                    </tr>
-                    <% end %>
 
-                    <% @pacientes_ds.each do |paciente| %>
-                    <tr class="hover:bg-[var(--bg-body)]/50 transition-colors">
-                        <td class="p-4 text-xs font-bold text-[var(--border-color)] text-center">
-                            #<%= paciente.id_paciente %>
-                        </td>
-                        <td class="p-4">
-                            <div class="text-sm font-bold text-[var(--text-main)] uppercase tracking-tight">
-                                <%= paciente.nombres %> <%= paciente.apellidos %>
-                            </div>
-                            <div class="text-[10px] text-[var(--text-muted)] font-semibold italic">
-                                <%= paciente.ocupacion || 'Sin ocupación' %>
-                            </div>
-                        </td>
-                        <td class="p-4">
-                            <div class="text-xs font-bold text-[var(--text-main)]"><%= paciente.celular %></div>
-                            <div class="text-[10px] text-[var(--tertiary)] font-medium"><%= paciente.email %></div>
-                        </td>
-                        <td class="p-4">
-                            <div class="text-xs text-[var(--text-main)] font-semibold"><%= paciente.ciudad %></div>
-                            <div class="text-[10px] text-[var(--text-muted)] uppercase tracking-tighter"><%= paciente.barrio %></div>
-                        </td>
-                        <td class="p-4 text-right">
-                            <div class="flex justify-end gap-3">
-                                <a href="/pacientes/<%= paciente.id_paciente %>/editar" class="btn btn-ghost !min-width-0 !px-3 !py-1 text-[10px]">
-                                    Editar
-                                </a>
-                                <form action="/pacientes/<%= paciente.id_paciente %>/eliminar" method="POST" class="inline" onsubmit="return confirm('¿Confirmar eliminación?')">
-                                    <button type="submit" class="btn btn-ghost !text-[var(--error)] !min-width-0 !px-3 !py-1 text-[10px]">
-                                        Eliminar
-                                    </button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <% end %>
+
+                <tbody class="divide-y divide-[var(--border-color)]">
+
+                <% if @pacientes_ds.empty? %>
+                <tr>
+                    <td colspan="6" class="py-20 text-center">
+                        <h5 class="text-[var(--text-muted)]">No hay pacientes registrados aún</h5>
+                        <p class="text-xs text-[var(--text-muted)] opacity-60">Usa el botón "Nuevo Registro" para empezar</p>
+                    </td>
+                </tr>
+                <% end %>
+
+                <% @pacientes_ds.each do |paciente| %>
+                <tr class="hover:bg-[var(--bg-body)]/50 transition-colors">
+
+                    <!-- ID -->
+                    <td class="text-center">                    
+                        <%= paciente.id_paciente %>
+                    </td>
+
+                    <!-- Paciente -->
+                    <td>
+                        <div>
+                            <%= paciente.nombres %> <%= paciente.apellidos %>
+                        </div>
+
+                        <div>
+                            <%= paciente.ocupacion || 'Sin ocupación' %>
+                        </div>
+                    </td>
+
+                    <!-- Edad -->
+                    <td>
+                        <%= paciente.edad || '—' %>
+                    </td>
+
+                    <!-- Contacto -->
+                    <td>
+                        <div>
+                            <%= paciente.celular %>
+                        </div>
+                        <div>
+                            <%= paciente.email %>
+                        </div>
+                    </td>
+
+                    <!-- Ciudad -->
+                    <td>
+                        <div>
+                            <%= paciente.ciudad %>
+                        </div>
+                        <div class="text-[10px] text-[var(--text-muted)]">
+                            <%= paciente.barrio %>
+                        </div>
+                    </td>
+
+                    <!-- Acciones -->
+                    <td class="table-actions">
+                        <div class="table-actions-group">
+
+                            <a href="/pacientes/<%= paciente.id_paciente %>/editar"
+                            class="table-action table-action-edit">
+                                Editar
+                            </a>
+
+                            <form action="/pacientes/<%= paciente.id_paciente %>/eliminar"
+                                method="POST"
+                                onsubmit="return confirm('¿Confirmar eliminación?')">
+
+                                <button type="submit"
+                                        class="table-action table-action-delete">
+                                    Eliminar
+                                </button>
+                            </form>
+
+                        </div>
+                    </td>
+
+                </tr>
+                <% end %>
+
                 </tbody>
 
-
-
-
-            </table>
+            </table>    
         </div>
 
         <div class="bg-[var(--bg-body)] p-4 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-4">
