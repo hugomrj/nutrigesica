@@ -42,9 +42,30 @@
     </div>
 </nav>
 
+
+<% if flash[:error] %>
+<div style="color: white; background: #ff4444; padding: 10px; margin-bottom: 20px;">
+  <%= flash[:error] %>
+</div>
+<% end %>
+
+<% if flash[:notice] %>
+<div style="color: white; background: #00bb00; padding: 10px; margin-bottom: 20px;">
+  <%= flash[:notice] %>
+</div>
+<% end %>
+
+
+
+
+
 <main class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+
     <%= yield %>
+
 </main>
+
+
 
 <script>
     (function() {
