@@ -23,8 +23,9 @@ get '/pacientes' do
   end
 
   # 3. Ordenamos por los más recientes y paginamos sobre el resultado (filtrado o no)
-  @pacientes_ds = ds.order(Sequel.desc(:id_paciente)).extension(:pagination).paginate(page, 10)
-  
+  # @pacientes_ds = ds.order(Sequel.desc(:id_paciente)).extension(:pagination).paginate(page, 10)
+  @pacientes_ds = ds.extension(:pagination).order(Sequel.desc(:id_paciente)).paginate(page, 10)
+
   # PRUEBA DE DEPURACIÓN:
   puts "Búsqueda: '#{@query}' | Resultados en esta página: #{@pacientes_ds.count}" 
   
