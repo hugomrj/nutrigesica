@@ -1,16 +1,40 @@
 # routes/paciente_routes.rb
 # (No incluyas `require 'sinatra'` aquí, porque ya se cargó en app.rb)
 
-# Listado
+
+
+
+# Listado con Búsqueda y Paginación
 get '/pacientes' do
-    page = (params[:page] || 1).to_i
-    @pacientes_ds = Paciente.dataset.extension(:pagination).paginate(page, 10)
-    
-    # PRUEBA DE DEPURACIÓN:
-    puts "Cantidad de pacientes: #{@pacientes_ds.count}" 
-    
-    erb :"pacientes/index"
+  page = (params[:page] || 1).to_i
+  @query = params[:q].to_s.strip # Capturamos lo que el usuario escribe
+
+  # 1. Empezamos con el dataset base
+  ds = Paciente.dataset
+
+  # 2. Si el usuario escribió algo en el buscador, filtramos
+  unless @query.empty?
+    search_pattern = "%#{@query}%"
+    ds = ds.where(
+      Sequel.ilike(:nombres, search_pattern) | 
+      Sequel.ilike(:apellidos, search_pattern) |
+      Sequel.ilike(:ciudad, search_pattern)
+    )
   end
+
+  # 3. Ordenamos por los más recientes y paginamos sobre el resultado (filtrado o no)
+  @pacientes_ds = ds.order(Sequel.desc(:id_paciente)).extension(:pagination).paginate(page, 10)
+  
+  # PRUEBA DE DEPURACIÓN:
+  puts "Búsqueda: '#{@query}' | Resultados en esta página: #{@pacientes_ds.count}" 
+  
+  erb :"pacientes/index"
+end
+
+
+
+
+
   
   
   # Formulario Nuevo
