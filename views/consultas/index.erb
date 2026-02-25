@@ -1,0 +1,145 @@
+<div class="space-y-6 max-w-6xl mx-auto">
+
+    <div class="flex flex-col md:flex-row justify-between items-end gap-4 mb-8">
+        <div class="flex-1 w-full">
+            <h3 class="mb-4">Listado de Consultas</h3>
+            
+            <form action="/consultas" method="GET" class="relative max-w-md group">
+                <input type="text" 
+                    name="q" 
+                    value="<%= @query %>" 
+                    placeholder="Buscar por paciente o motivo..." 
+                    class="w-full pl-4 pr-20 py-2.5 text-[11px] font-medium border border-[var(--border-color)] rounded-lg focus:outline-none focus:border-gray-400 bg-white transition-all shadow-sm"
+                >
+                
+                <div class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                    <% if @query && !@query.empty? %>
+                        <a href="/consultas" 
+                        class="p-1.5 text-gray-400 hover:text-red-500 transition-colors" 
+                        title="Limpiar búsqueda">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </a>
+                        <div class="w-[1px] h-4 bg-[var(--border-color)]"></div>
+                    <% end %>
+
+                    <button type="submit" class="p-1.5 text-gray-500 hover:text-black transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <a href="/consultas/new" class="btn btn-primary">
+            Nueva consulta
+        </a>
+
+    </div>
+
+    <div class="ui-card !p-0 overflow-hidden">
+        <div class="overflow-x-auto">            
+            <table class="ui-table w-full">
+
+                <thead>
+                    <tr class="bg-[var(--bg-body)] border-b border-[var(--border-color)]">
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-center w-16">ID</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Fecha</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Paciente</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">Motivo</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-center">Peso (kg)</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-center">IMC</th>
+                        <th class="p-4 text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)] text-right">Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody class="divide-y divide-[var(--border-color)]">
+
+                <% if @consultas.empty? %>
+                <tr>
+                    <td colspan="7" class="py-20 text-center">
+                        <h5 class="text-[var(--text-muted)]">No hay consultas registradas aún</h5>
+                        <p class="text-xs text-[var(--text-muted)] opacity-60">
+                            Puedes crear una consulta desde la ficha de un paciente
+                        </p>
+                    </td>
+                </tr>
+                <% end %>
+
+                <% @consultas.each do |consulta| %>
+                <tr class="hover:bg-[var(--bg-body)]/50 transition-colors">
+
+                    <!-- ID -->
+                    <td class="text-center">
+                        <%= consulta.id_consulta %>
+                    </td>
+
+                    <!-- Fecha -->
+                    <td>
+                        <%= consulta.fecha.strftime('%d/%m/%Y') %>
+                    </td>
+
+                    <!-- Paciente (nombre y apellido) -->
+                    <td>
+                        <%= consulta.paciente.nombres %> <%= consulta.paciente.apellidos %>
+                    </td>
+
+                    <!-- Motivo (truncado) -->
+                    <td>
+                        <%= consulta.motivo_consulta.to_s[0..50] %><%= '…' if consulta.motivo_consulta.to_s.length > 50 %>
+                    </td>
+
+                    <!-- Peso actual -->
+                    <td class="text-center">
+                        <%= number_with_precision(consulta.peso_actual, precision: 1) if consulta.peso_actual %>
+                    </td>
+
+                    <!-- IMC -->
+                    <td class="text-center">
+                        <%= number_with_precision(consulta.imc, precision: 1) if consulta.imc %>
+                    </td>
+
+                    <!-- Acciones -->
+                    <td class="table-actions">
+                        <div class="table-actions-group">
+                            <a href="/consultas/<%= consulta.id_consulta %>" class="table-action table-action-view">
+                                Ver
+                            </a>
+
+                            <a href="/consultas/<%= consulta.id_consulta %>/editar" class="table-action table-action-edit">
+                                Editar
+                            </a>
+
+                            <form action="/consultas/<%= consulta.id_consulta %>/eliminar" method="POST" 
+                                onsubmit="return confirm('¿Confirmar eliminación?')" style="margin:0;">
+                                <button type="submit" class="table-action table-action-delete">
+                                    Eliminar
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+
+                </tr>
+                <% end %>
+
+                </tbody>
+
+            </table>    
+        </div>
+
+        <div class="bg-[var(--bg-body)] p-4 border-t border-[var(--border-color)] flex flex-col md:flex-row justify-between items-center gap-4">
+            <span class="text-[10px] font-black uppercase tracking-widest text-[var(--text-muted)]">
+                <% if @query && !@query.empty? %>
+                    Encontrados <%= @consultas.pagination_record_count %> resultados para "<%= @query %>"
+                    <span class="mx-2">|</span>
+                <% end %>
+                Página <%= @consultas.current_page %> de <%= @consultas.page_count %>
+            </span>
+            
+            <%= pagination_links(@consultas) %>
+        </div>
+
+    </div>
+</div>

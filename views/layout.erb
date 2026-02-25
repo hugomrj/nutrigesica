@@ -7,6 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     
+    
+    <!--  Slim Select -->
+    <link href="https://cdn.jsdelivr.net/npm/slim-select/dist/slimselect.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/slim-select/dist/slimselect.min.js"></script>
+
+
     <link rel="stylesheet" href="/css/style.css"> <!-- tu archivo CSS existente -->
 </head>
 <body class="bg-[var(--bg-body)]">
@@ -24,7 +30,11 @@
 
         <div id="nav-menu">
             <a href="/pacientes" class="text-sm font-black uppercase tracking-widest py-2 hover:text-[var(--accent)]">Pacientes</a>
+            <a href="/consultas" class="text-sm font-black uppercase tracking-widest py-2 hover:text-[var(--accent)]">Consultas</a>
 
+
+
+            <!--
             <div class="nav-dropdown relative">
                 <button class="nav-dropdown-trigger text-sm font-black uppercase tracking-widest py-2 flex items-center gap-2 bg-transparent border-none text-white cursor-pointer">
                     Sistema <span class="text-[8px] opacity-60">▼</span>
@@ -34,6 +44,7 @@
                     <a href="/usuarios" class="block px-4 py-3 text-xs font-bold uppercase hover:bg-white/5 hover:text-[var(--accent)]">Usuarios</a>
                 </div>
             </div>
+            -->
 
             <a href="/logout" class="text-sm font-black uppercase tracking-widest py-2 text-red-400 hover:text-red-300">
                 Salir

@@ -1,0 +1,95 @@
+<div class="space-y-10">
+
+    <section>
+
+        <fieldset class="space-y-6">            
+            <legend class="text-[var(--tertiary)]">01. Seguimiento Antropométrico</legend>
+            
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div class="md:col-span-3 input-group">
+                    <label>Fecha</label>
+                    <input type="date" name="consulta[fecha]" value="<%= @consulta[:fecha] %>" class="input-control">
+                </div>
+                <div class="md:col-span-3 input-group">
+                    <label>Peso (kg)</label>
+                    <input type="number" step="0.1" name="consulta[peso_actual]" value="<%= @consulta[:peso_actual] %>" class="input-control">
+                </div>
+                <div class="md:col-span-3 input-group">
+                    <label>Talla (m)</label>
+                    <input type="number" step="0.01" name="consulta[talla]" value="<%= @consulta[:talla] %>" class="input-control">
+                </div>
+                <div class="md:col-span-3 input-group">
+                    <label>Presión Arterial</label>
+                    <input type="text" name="consulta[presion_arterial]" value="<%= @consulta[:presion_arterial] %>" class="input-control" placeholder="120/80">
+                </div>
+            </div>
+
+        </fieldset>
+
+    </section>
+
+
+    <section>
+
+        <fieldset class="space-y-6">
+            <legend class="text-[var(--tertiary)]">02. Motivo y Antecedentes</legend>
+
+            <div class="grid grid-cols-1 gap-6">
+                <div class="input-group">
+                    <label>Motivo de la Consulta</label>
+                    <textarea name="consulta[motivo_consulta]" rows="2" class="input-control"><%= @consulta[:motivo_consulta] %></textarea>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="input-group">
+                        <label>Antecedentes de Salud</label>
+                        <textarea name="consulta[antecedentes_salud]" rows="3" class="input-control"><%= @consulta[:antecedentes_salud] %></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Antecedentes Familiares</label>
+                        <textarea name="consulta[antecedentes_familiares]" rows="3" class="input-control"><%= @consulta[:antecedentes_familiares] %></textarea>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+    </section>
+
+    <section>
+
+        <fieldset class="space-y-6">
+            <legend class="text-[var(--tertiary)]">03. Evaluación Alimentaria</legend>
+       
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="input-group">
+                    <label>Estilo de Vida / Actividad</label>
+                    <textarea name="consulta[estilo_vida]" rows="3" class="input-control"><%= @consulta[:estilo_vida] %></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Indicadores Dietéticos</label>
+                    <textarea name="consulta[indicadores_dieteticos]" rows="3" class="input-control"><%= @consulta[:indicadores_dieteticos] %></textarea>
+                </div>
+                <div class="md:col-span-2 input-group">
+                    <label>Dieta Habitual (Recordatorio 24h)</label>
+                    <textarea name="consulta[dieta_habitual]" rows="4" class="input-control"><%= @consulta[:dieta_habitual] %></textarea>
+                </div>
+            </div>
+        </fieldset>
+    </section>
+
+    <section>
+
+        <fieldset class="space-y-6">
+            <legend class="text-[var(--tertiary)]">04. Plan de Acción</legend>
+
+
+            <div class="input-group">
+                <label>Observaciones Generales e Indicaciones</label>
+                <textarea name="consulta[observaciones_generales]" rows="5" class="input-control"><%= @consulta[:observaciones_generales] %></textarea>
+            </div>
+        <fieldset>
+    </section>
+
+</div>
+
+

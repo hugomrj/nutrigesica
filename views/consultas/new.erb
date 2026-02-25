@@ -1,0 +1,45 @@
+<div class="mx-auto max-w-6xl">
+    <h3 class="mb-4">Nueva Consulta</h3>
+
+    <div class="ui-card">
+        <form action="/consultas" method="POST" class="space-y-10">
+            
+<div class="form-group">
+    <label class="label-style">Paciente</label>
+    <select name="paciente_id" id="select-paciente" class="input-style" required>
+        <option value="">-- Seleccionar Paciente --</option>
+        <% @pacientes.each do |p| %>
+            <option value="<%= p.id_paciente %>">
+                <%= p.apellidos %>, <%= p.nombres %>
+            </option>
+        <% end %>
+    </select>
+</div>
+
+            <%= erb :"consultas/_form" %>
+        
+            <div class="form-footer">
+                <a href="/consultas" class="btn btn-ghost">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Verificamos que el elemento exista antes de inicializarlo
+    const el = document.querySelector('#select-paciente');
+    if (el) {
+      new SlimSelect({
+        select: '#select-paciente',
+        settings: {
+          placeholderText: 'Busca un paciente...',
+          searchText: 'No se encontraron resultados',
+          searchPlaceholder: 'Escribe para buscar',
+        }
+      });
+    }
+  });
+</script>

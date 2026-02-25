@@ -7,8 +7,9 @@
     --secondary: #0f172a;           
     --secondary-hover: #1e293b;     
     --secondary-surface: #1e293b;   
-    --tertiary: #6366f1; 
-    --tertiary-hover: #4f46e5;
+--tertiary: #0d5e56;      /* Teal oscuro pero legible */
+--tertiary-hover: #0b4d46; /* Más oscuro para hover */
+
     --accent: #10b981;             
     --accent-hover: #059669;        
     
@@ -152,15 +153,22 @@ h6 {
     box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
 }
 
-
-
-
 .form-footer {
     display: flex;
     justify-content: flex-end;
     padding-top: 1.5rem; /* El pt-6 de tailwind */
     margin-top: 1.5rem;
     border-top: 1px solid var(--border-color);
+}
+
+
+/* Selecciona todos los legend dentro de un fieldset */
+fieldset legend {
+    font-weight: bold;
+    /* Opcional: añade un poco de espacio abajo para que no pegue con los inputs */
+    padding-bottom: 0.5rem; 
+    /* Opcional: aumenta un poco el tamaño si quieres que resalte más */
+    font-size: 1.1rem;
 }
 
 /* ==========================================================================
