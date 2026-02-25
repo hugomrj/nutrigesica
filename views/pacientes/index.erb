@@ -120,25 +120,33 @@
 
                     <!-- Acciones -->
                     <td class="table-actions">
-                        <div class="table-actions-group">
+                    <div class="table-actions-group">
+                
+                        <a href="/pacientes/<%= paciente.id_paciente %>"
+                           class="table-action table-action-view">
+                            Ver
+                        </a>
+                
+                        <a href="/pacientes/<%= paciente.id_paciente %>/editar"
+                           class="table-action table-action-edit">
+                            Editar
+                        </a>
+                
+                        <form action="/pacientes/<%= paciente.id_paciente %>/eliminar"
+                              method="POST"
+                              onsubmit="return confirm('¿Confirmar eliminación?')">
+                
+                            <button type="submit"
+                                    class="table-action table-action-delete">
+                                Eliminar
+                            </button>
+                        </form>
+                
+                    </div>
+                </td>
 
-                            <a href="/pacientes/<%= paciente.id_paciente %>/editar"
-                            class="table-action table-action-edit">
-                                Editar
-                            </a>
 
-                            <form action="/pacientes/<%= paciente.id_paciente %>/eliminar"
-                                method="POST"
-                                onsubmit="return confirm('¿Confirmar eliminación?')">
 
-                                <button type="submit"
-                                        class="table-action table-action-delete">
-                                    Eliminar
-                                </button>
-                            </form>
-
-                        </div>
-                    </td>
 
                 </tr>
                 <% end %>

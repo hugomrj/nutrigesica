@@ -45,35 +45,17 @@ end
   
   
   
-  # Crear un nuevo paciente
   post '/pacientes' do
-    # Muestra qué llega desde el formulario
-    puts "\n[DEBUG] PARAMETROS RECIBIDOS: #{params.inspect}" 
-  
-    allowed_params = params.select do |key, _|
-      ['nombres', 'apellidos', 'fecha_nacimiento', 'email', 'celular', 
-       'ocupacion', 'ciudad', 'barrio'].include?(key)
-    end
-  
-    @paciente = Paciente.new(allowed_params)
-  
-    if @paciente.save # .save ya ejecuta .valid? internamente en Sequel
-      flash[:notice] = 'Paciente creado correctamente.'
+    # Sequel permite crear y guardar en un solo paso
+    @paciente = Paciente.new(params[:paciente]) 
+    
+    if @paciente.save
+      flash[:success] = "Paciente creado"
       redirect '/pacientes'
     else
-      # --- MENSAJE EN CONSOLA SI ALGO SALE MAL ---
-      puts "\n" + "!" * 30
-      puts "ERROR AL GUARDAR PACIENTE:"
-      # Imprime la lista de errores (ej: ["nombres is not present", "email is already taken"])
-      p @paciente.errors.full_messages 
-      puts "!" * 30 + "\n"
-      # -------------------------------------------
-      
-      flash.now[:error] = "No se pudo guardar: " + @paciente.errors.full_messages.join(", ")
       erb :"pacientes/new"
     end
   end
-  
   
   
   
@@ -84,5 +66,44 @@ end
   end
   
   
+
+
+  # Ver detalle de un paciente
+  get '/pacientes/:id' do
+    @paciente = Paciente[params[:id]]
+    erb :"pacientes/show"
+  end
+
+
+
+  # Actualizar los datos de un paciente
+  put '/pacientes/:id' do
+    @paciente = Paciente[params[:id]]
+    
+    # .update es el método "profesional" de Sequel: 
+    # Carga los datos de params[:paciente], valida y guarda en un solo paso.
+    if @paciente.update(params[:paciente])
+      flash[:notice] = "Datos actualizados"
+      redirect "/pacientes"
+    else
+      flash.now[:error] = "No se pudo actualizar"
+      erb :"pacientes/edit"
+    end
+  end
+
+
+
+
+# Eliminar un paciente
+post '/pacientes/:id/eliminar' do
+  paciente = Paciente[params[:id]]
   
+  if paciente
+    paciente.destroy
+    flash[:notice] = 'Paciente eliminado correctamente.'
+  else
+    flash[:error] = 'Paciente no encontrado.'
+  end
   
+  redirect '/pacientes'
+end

@@ -1,0 +1,101 @@
+<div class="mx-auto max-w-6xl">
+
+    <div class="flex justify-between items-center mb-6">
+        <h3 class="mb-0">Ficha del Paciente: <%= @paciente.nombres %></h3>
+        <div class="flex gap-2">
+            <a href="/pacientes" class="btn btn-ghost">
+                Volver al listado
+            </a>
+            <a href="/pacientes/<%= @paciente.id_paciente %>/editar" class="btn btn-primary">
+                Editar Datos
+            </a>
+        </div>
+    </div>
+
+    <div class="ui-card p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+
+            <fieldset class="space-y-4">
+                <legend class="text-[var(--tertiary)] font-bold border-b border-gray-100 w-full mb-4">
+                    01. Identidad
+                </legend>
+
+                <div class="detail-group">
+                    <label class="block text-sm text-gray-500">Nombre Completo</label>
+                    <p class="text-lg font-medium"><%= @paciente.nombres %> <%= @paciente.apellidos %></p>
+                </div>
+
+                <div class="detail-group">
+                    <label class="block text-sm text-gray-500">Fecha de Nacimiento</label>
+                    <p><%= @paciente.fecha_nacimiento %></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="detail-group">
+                        <label class="block text-sm text-gray-500">Edad</label>
+                        <p><%= @paciente.edad || 'N/A' %> años</p>
+                    </div>
+                    <div class="detail-group">
+                        <label class="block text-sm text-gray-500">Estado Civil</label>
+                        <p><%= @paciente.estado_civil || 'No especificado' %></p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="space-y-4">
+                <legend class="text-[var(--tertiary)] font-bold border-b border-gray-100 w-full mb-4">
+                    02. Profesional
+                </legend>
+
+                <div class="detail-group">
+                    <label class="block text-sm text-gray-500">Ocupación</label>
+                    <p><%= @paciente.ocupacion || 'Sin registro' %></p>
+                </div>
+
+                <div class="detail-group">
+                    <label class="block text-sm text-gray-500">Horario Laboral</label>
+                    <p><%= @paciente.horario_laboral || 'Sin registro' %></p>
+                </div>
+            </fieldset>
+
+            <fieldset class="space-y-4">
+                <legend class="text-[var(--tertiary)] font-bold border-b border-gray-100 w-full mb-4">
+                    03. Ubicación
+                </legend>
+
+                <div class="detail-group">
+                    <label class="block text-sm text-gray-500">Dirección</label>
+                    <p><%= @paciente.direccion || 'Sin dirección' %></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="detail-group">
+                        <label class="block text-sm text-gray-500">Ciudad</label>
+                        <p><%= @paciente.ciudad %></p>
+                    </div>
+                    <div class="detail-group">
+                        <label class="block text-sm text-gray-500">Barrio</label>
+                        <p><%= @paciente.barrio %></p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="space-y-4">
+                <legend class="text-[var(--tertiary)] font-bold border-b border-gray-100 w-full mb-4">
+                    04. Contacto
+                </legend>
+
+                <div class="detail-group">
+                    <label class="block text-sm text-gray-500">Email</label>
+                    <p class="text-blue-600"><%= @paciente.email %></p>
+                </div>
+
+                <div class="detail-group">
+                    <label class="block text-sm text-gray-500">Celular</label>
+                    <p><%= @paciente.celular %></p>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+</div>
