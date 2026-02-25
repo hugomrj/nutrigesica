@@ -276,64 +276,58 @@ h6 {
 }
 
 /* El toque final: un hover sutil */
-.ui-table tbody tr:hover {
-    background-color: #fbfcfd;
+.ui-table tbody tr:hover {    
     transition: background 0.2s ease;
+
+    background-color: #fbfcfd;
+    background-color: #f8fafc;
 }
 
 
 
-.table-actions {
-    text-align: right;
-}
 
 .table-actions-group {
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 6px;
 }
 
-/* Base exclusiva para acciones dentro de tabla */
 .table-action {
-    display: inline-flex;          /* Igual comportamiento */
-    align-items: center;           /* Centrado vertical */
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
-
-    min-width: 60px;               /* Fuerza mismo ancho mínimo */
-    height: 32px;                  /* Altura fija armoniosa */
-
-    padding: 0 10px;               /* Solo horizontal */
-    font-size: 0.75rem;
-    font-weight: 600;
     
-    border-radius: 6px;
-    border: 1px solid transparent;
+    /* Botón más pequeño */
+    width: 55px; 
+    height: 26px;
+    
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 4px;
     text-decoration: none;
+    border: none;
     cursor: pointer;
-
-    line-height: 1;                /* Evita diferencias */
+    transition: all 0.2s;
 }
 
-/* Variantes */
-.table-action-edit {
-    background: #f1f5f9;
-    color: #1f2937;
+/* Colores tenues (Pasteles suaves) */
+.table-action-view { 
+    background: #f0f7ff; 
+    color: #5a8dee; 
 }
+.table-action-view:hover { background: #e1effe; }
 
-.table-action-edit:hover {
-    background: #e2e8f0;
+.table-action-edit { 
+    background: #f8fafc; 
+    color: #64748b; 
 }
+.table-action-edit:hover { background: #f1f5f9; }
 
-.table-action-delete {
-    background: #fee2e2;
-    color: #b91c1c;
+.table-action-delete { 
+    background: #fff5f5; 
+    color: #f87171; 
 }
-
-.table-action-delete:hover {
-    background: #fecaca;
-}
-
-
+.table-action-delete:hover { background: #fee2e2; }
 
 
 
