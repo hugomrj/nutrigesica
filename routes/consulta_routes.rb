@@ -26,6 +26,25 @@ end
 
 
 
+# Crear una nueva consulta
+post '/consultas' do
+  datos = params[:consulta] || {}
+  datos[:paciente_id] ||= params[:paciente_id]
+  
+  @consulta = Consulta.new(datos)
+  
+  if @consulta.save
+    # Guardamos el mensaje en la sesión "flash"
+    flash[:success] = "Consulta registrada exitosamente"
+    redirect '/consultas'
+  else
+    @pacientes = Paciente.order(:apellidos).all
+    erb :"consultas/new"
+  end
+end
+
+
+
 
 
 
@@ -38,49 +57,3 @@ end
 
 
 
-
-
-
-# Crear consulta
-post '/pacientes/:paciente_id/consultas' do
-  @paciente = Paciente[params[:paciente_id]]
-  @consulta = Consulta.new(params[:consulta])
-  @consulta.paciente_id = @paciente.id_paciente
-  if @consulta.save
-    flash[:success] = "Consulta guardada correctamente"
-    redirect "/pacientes/#{@paciente.id_paciente}"
-  else
-    erb :"consultas/new"
-  end
-end
-
-# Formulario para editar consulta
-get '/consultas/:id/editar' do
-  @consulta = Consulta[params[:id]]
-  @paciente = @consulta.paciente
-  erb :"consultas/edit"
-end
-
-# Actualizar consulta
-put '/consultas/:id' do
-  @consulta = Consulta[params[:id]]
-  if @consulta.update(params[:consulta])
-    flash[:notice] = "Consulta actualizada"
-    redirect "/consultas/#{@consulta.id_consulta}"
-  else
-    @paciente = @consulta.paciente
-    erb :"consultas/edit"
-  end
-end
-
-# Eliminar consulta
-post '/consultas/:id/eliminar' do
-  consulta = Consulta[params[:id]]
-  paciente_id = consulta.paciente_id
-  if consulta.destroy
-    flash[:notice] = "Consulta eliminada"
-  else
-    flash[:error] = "No se pudo eliminar"
-  end
-  redirect "/pacientes/#{paciente_id}"
-end

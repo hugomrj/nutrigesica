@@ -4,17 +4,20 @@
     <div class="ui-card">
         <form action="/consultas" method="POST" class="space-y-10">
             
-<div class="form-group">
-    <label class="label-style">Paciente</label>
-    <select name="paciente_id" id="select-paciente" class="input-style" required>
-        <option value="">-- Seleccionar Paciente --</option>
-        <% @pacientes.each do |p| %>
-            <option value="<%= p.id_paciente %>">
-                <%= p.apellidos %>, <%= p.nombres %>
-            </option>
-        <% end %>
-    </select>
-</div>
+
+          <div class="form-group">
+              <label class="label-style">Paciente</label>
+              <select name="consulta[paciente_id]" id="select-paciente" class="input-style" required>
+                  <option value="">-- Seleccionar Paciente --</option>
+                  <% @pacientes.each do |p| %>
+                      <option value="<%= p.id_paciente %>">
+                          <%= p.apellidos %>, <%= p.nombres %>
+                      </option>
+                  <% end %>
+              </select>
+          </div>
+
+
 
             <%= erb :"consultas/_form" %>
         
