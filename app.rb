@@ -1,93 +1,66 @@
 require 'sinatra'
 require 'sinatra/flash'
 require 'sinatra/reloader' if development?
-require 'cgi'  # para el helper de paginación
+require 'cgi'
 
-
-# Cargar modelos
+# Cargar modelos, helpers y rutas
 Dir["./models/*.rb"].each { |file| require file }
-
-# Cargar helpers
 Dir["./helpers/*.rb"].each { |file| require file }
-
-# Cargar rutas (orden importante: las rutas se evalúan en el orden de carga)
 Dir["./routes/*.rb"].each { |file| require file }
 
-
-
-
-# Configuraciones
+# Configuraciones base
 set :root, File.dirname(__FILE__)
 set :views, proc { File.join(root, "views") }
 
+# --- CONFIGURACIÓN DINÁMICA DE SESIÓN ---
+# En producción usa /nutrigesica/, en desarrollo usa /
+session_path = production? ? '/nutrigesica/' : '/'
 
-# AGREGA ESTO:
 use Rack::Session::Cookie, 
   :key => 'rack.session',
-  :path => '/',
-  :secret => 'a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8' 
-
-
+  :path => session_path,
+  :secret => 'a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8'
 
 register Sinatra::Flash
-
 helpers PaginationHelper
 
-
-
-# Este bloque corre antes de CUALQUIER ruta
 before do
   @current_user = User[session[:user_id]] if session[:user_id]
 end
 
+# --- RUTAS ---
 
-
-# La raíz '/' ahora es un "tráfico"
 get '/' do
+  # Usar url() o to() asegura que Sinatra añada el prefijo necesario
   if session[:user_id]
-    redirect '/dashboard'
+    redirect to('/dashboard')
   else
-    redirect '/login'
+    redirect to('/login')
   end
 end
 
-# El login ahora es independiente
 get '/login' do
-  redirect '/dashboard' if session[:user_id]
-  erb :login, layout: :layout_base # <--- Usa el base sin Nav
+  redirect to('/dashboard') if session[:user_id]
+  erb :login, layout: :layout_base
 end
 
-
 post '/login' do
-  puts ">>> INTENTO DE LOGIN <<<"
-  puts "Params recibidos: #{params.inspect}"
-  
   user = User.first(username: params[:username].strip)
-  puts "Usuario encontrado en DB: #{user.inspect}"
-  
   if user && user.password == params[:password]
-    puts "LOGIN EXITOSO - Redirigiendo..."
     session[:user_id] = user.id
-    redirect '/dashboard'
+    redirect to('/dashboard')
   else
-    puts "LOGIN FALLIDO"
     @error = "Credenciales inválidas"
     erb :login, layout: :layout_base
   end
 end
 
-
 get '/logout' do
-  session.clear # Borra todos los datos de la sesión
-  redirect '/login'
+  session.clear
+  redirect to('/login')
 end
 
-
-# Ruta exclusiva para el Dashboard
 get '/dashboard' do
-  # Protección: si alguien intenta entrar por URL sin permiso
-  redirect '/login' unless session[:user_id]
-  
-  erb :index # O puedes crear dashboard.erb si prefieres
+  redirect to('/login') unless session[:user_id]
+  erb :index
 end
-
