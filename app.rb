@@ -12,13 +12,10 @@ Dir["./routes/*.rb"].each { |file| require file }
 set :root, File.dirname(__FILE__)
 set :views, proc { File.join(root, "views") }
 
-# --- CONFIGURACIÓN DINÁMICA DE SESIÓN ---
-# En producción usa /nutrigesica/, en desarrollo usa /
-session_path = production? ? '/nutrigesica/' : '/'
-
+# Ahora la ruta de la cookie es fija para ambos entornos
 use Rack::Session::Cookie, 
   :key => 'rack.session',
-  :path => session_path,
+  :path => '/nutrigesica/', 
   :secret => 'a7b8c9d0e1f2g3h4i5j6k7l8m9n0o1p2q3r4s5t6u7v8w9x0y1z2a3b4c5d6e7f8'
 
 register Sinatra::Flash
@@ -29,9 +26,10 @@ before do
 end
 
 # --- RUTAS ---
+# IMPORTANTE: Al usar 'map' en config.ru, estas rutas se vuelven 
+# relativas a /nutrigesica/. Es decir, '/' aquí es '/nutrigesica/' en el navegador.
 
 get '/' do
-  # Usar url() o to() asegura que Sinatra añada el prefijo necesario
   if session[:user_id]
     redirect to('/dashboard')
   else
