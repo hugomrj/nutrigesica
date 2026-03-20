@@ -59,3 +59,13 @@ Ejecutar en Desarrollo
 ```bash
 bundle exec ruby app.rb
 ```
+
+
+dev
+rackup
+
+
+prod 
+puma config.ru
+
+
