@@ -55,14 +55,21 @@ Crear un archivo .env en la raíz del proyecto con el siguiente contenido:
 
 Inicializar la tabla de usuarios según la configuración del proyecto.
 
+
+
+
 Ejecutar en Desarrollo
-```bash
-bundle exec ruby app.rb
+Utilizamos watchexec para el refresco automático del servidor al detectar cambios en el código.
+
+Iniciar el servidor:
+
+```Bash
+watchexec -r -e rb,erb,ru -- bundle exec rackup -p 4567
 ```
+Acceso:
+http://localhost:4567/nutrigesica
 
 
-dev
-rackup
 
 
 prod 

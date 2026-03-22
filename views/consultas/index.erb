@@ -4,7 +4,7 @@
         <div class="flex-1 w-full">
             <h3 class="mb-4">Listado de Consultas</h3>
             
-            <form action="/consultas" method="GET" class="relative max-w-md group">
+            <form action="<%= url('/consultas') %>" method="GET" class="relative max-w-md group">
                 <input type="text" 
                     name="q" 
                     value="<%= @query %>" 
@@ -14,7 +14,7 @@
                 
                 <div class="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
                     <% if @query && !@query.empty? %>
-                        <a href="/consultas" 
+                        <a href="<%= url('/consultas') %>" 
                         class="p-1.5 text-gray-400 hover:text-red-500 transition-colors" 
                         title="Limpiar búsqueda">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
@@ -33,7 +33,7 @@
             </form>
         </div>
 
-        <a href="/consultas/new" class="btn btn-primary">
+        <a href="<%= url('/consultas/new') %>" class="btn btn-primary">
             Nueva consulta
         </a>
 
@@ -104,15 +104,15 @@
                     <!-- Acciones -->
                     <td class="table-actions">
                         <div class="table-actions-group">
-                            <a href="/consultas/<%= consulta.id_consulta %>" class="table-action table-action-view">
+                            <a href="<%= url("/consultas/#{consulta.id_consulta}") %>" class="table-action table-action-view">
                                 Ver
                             </a>
-
-                            <a href="/consultas/<%= consulta.id_consulta %>/editar" class="table-action table-action-edit">
+                    
+                            <a href="<%= url("/consultas/#{consulta.id_consulta}/editar") %>" class="table-action table-action-edit">
                                 Editar
                             </a>
-
-                            <form action="/consultas/<%= consulta.id_consulta %>/eliminar" method="POST" 
+                    
+                            <form action="<%= url("/consultas/#{consulta.id_consulta}/eliminar") %>" method="POST" 
                                 onsubmit="return confirm('¿Confirmar eliminación?')" style="margin:0;">
                                 <button type="submit" class="table-action table-action-delete">
                                     Eliminar
@@ -120,7 +120,7 @@
                             </form>
                         </div>
                     </td>
-
+                    
                 </tr>
                 <% end %>
 

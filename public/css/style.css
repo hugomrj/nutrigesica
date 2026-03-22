@@ -2,36 +2,38 @@
    1. VARIABLES & TOKENS
    ========================================================================== */
    :root {
+    /* Brand Colors */
     --primary: #0f766e;   
     --primary-hover: #139086; 
     --secondary: #0f172a;           
     --secondary-hover: #1e293b;     
     --secondary-surface: #1e293b;   
---tertiary: #0d5e56;      /* Teal oscuro pero legible */
---tertiary-hover: #0b4d46; /* Más oscuro para hover */
-
+    --tertiary: #0d5e56;
+    --tertiary-hover: #0b4d46;
     --accent: #10b981;             
     --accent-hover: #059669;        
     
+    /* UI Colors */
     --bg-body: #f8fafc;            
     --card-bg: #ffffff;
     --border-color: #e2e8f0;           
     --text-main: #1e293b;          
     --text-muted: #64748b;         
     
+    /* Status */
     --success: #22c55e;     
     --error: #ef4444;       
     --warning: #f59e0b;        
 
+    /* Tokens */
     --radius-lg: 16px;
     --radius-md: 10px;
     --shadow-sm: 0 4px 6px -1px rgba(15, 118, 110, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    
     --font-main: 'Urbanist', sans-serif;
 }
 
 /* ==========================================================================
-   2. BASE & TIPOGRAFÍA ESTÁNDAR
+   2. BASE & TIPOGRAFÍA (H-SYSTEM)
    ========================================================================== */
 body {
     padding: 0 !important;
@@ -43,64 +45,23 @@ body {
     letter-spacing: -0.02em;
 }
 
-/* ==========================================================================
-   TIPOGRAFÍA SISTEMATIZADA (H-SYSTEM)
-   ========================================================================== */
-
-   h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     color: var(--text-main);
     font-family: var(--font-main);
     line-height: 1.1;
     margin: 0;
-    display: block;
 }
 
-/* Bajamos de 48px a 36px - Mucho más elegante para el Login */
-h1 { 
-    font-size: 2.25rem !important; 
-    font-weight: 900 !important; 
-    letter-spacing: -0.04em !important; 
-}
-
-/* Bajamos de 36px a 30px - Ideal para Listado de Pacientes */
-h2 { 
-    font-size: 1.875rem !important; 
-    font-weight: 800 !important; 
-    letter-spacing: -0.03em !important; 
-}
-
-/* Bajamos de 28px a 24px */
-h3 { 
-    font-size: 1.5rem !important; 
-    font-weight: 800 !important; 
-    letter-spacing: -0.02em !important;
-}
-
-/* 20px - Subtítulos de sección */
-h4 { 
-    font-size: 1.25rem !important; 
-    font-weight: 700 !important; 
-}
-
-/* 16px - Texto destacado */
-h5 { 
-    font-size: 1rem !important; 
-    font-weight: 700 !important; 
-}
-
-/* 13px - Micro etiquetas */
-h6 { 
-    font-size: 0.815rem !important; 
-    font-weight: 800 !important; 
-    text-transform: uppercase !important; 
-
-}
+h1 { font-size: 2.25rem !important; font-weight: 900 !important; letter-spacing: -0.04em !important; }
+h2 { font-size: 1.875rem !important; font-weight: 800 !important; letter-spacing: -0.03em !important; }
+h3 { font-size: 1.5rem !important; font-weight: 800 !important; letter-spacing: -0.02em !important; }
+h4 { font-size: 1.25rem !important; font-weight: 700 !important; }
+h5 { font-size: 1rem !important; font-weight: 700 !important; }
+h6 { font-size: 0.815rem !important; font-weight: 800 !important; text-transform: uppercase !important; }
 
 /* ==========================================================================
    3. COMPONENTES: CARDS & LAYOUT
    ========================================================================== */
-
-
 .ui-card {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
@@ -114,331 +75,193 @@ h6 {
     box-shadow: 0 10px 15px -3px rgba(15, 118, 110, 0.08);
 }
 
-
 /* ==========================================================================
    4. COMPONENTES: FORMULARIOS
    ========================================================================== */
 .input-group {
     display: flex;
     flex-direction: column;
-    gap: 8px; 
     margin-bottom: 1.5rem;
 }
 
-
-.input-group label {
-    font-size: 0.9rem;      /* Un pelín más grande para compensar el peso fino */
-    font-weight: 600;        /* Semibold en lugar de Bold (menos agresivo) */
-    color: var(--text-muted); /* Color grisáceo, no negro total */
-    text-transform: none;    /* Lectura natural (Ej: Nombres, no NOMBRES) */
-    letter-spacing: -0.01em; /* Tracking natural de lectura */
-    margin-bottom: 2px;      /* Espacio mínimo con el input */
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    transition: color 0.2s ease;
 }
 
+.input-group:focus-within label { color: var(--primary); }
 
-
-.input-control, input[type="text"], input[type="password"] {
+.input-control, 
+input[type="text"], input[type="password"], 
+input[type="number"], input[type="date"], 
+textarea, select {
     width: 100%;
-    padding: 0.6rem 1rem;
+    padding: 0.75rem 1rem;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
     font-family: var(--font-main);
     font-size: 0.95rem;
-    transition: all 0.2s;
+    color: var(--text-main);
+    background-color: #ffffff;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     outline: none;
 }
 
-.input-control:focus, input:focus {
+.input-control:focus, input:focus, textarea:focus {
     border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+}
+
+textarea.input-control { min-height: 80px; resize: vertical; line-height: 1.5; }
+
+/* Legend & Fieldset: REFORZADO */
+fieldset { border: none; padding: 0; margin: 0; }
+
+html body fieldset legend,
+fieldset legend {
+    display: block !important;
+    width: 100% !important;
+    color: var(--tertiary) !important;
+    font-weight: 800 !important;
+    font-size: 1.1rem !important;
+    border-bottom: 1px solid var(--border-color) !important;
+    margin-bottom: 1.5rem !important;
+    padding-bottom: 0.5rem !important;
+    float: none;
 }
 
 .form-footer {
     display: flex;
     justify-content: flex-end;
-    padding-top: 1.5rem; /* El pt-6 de tailwind */
-    margin-top: 1.5rem;
+    gap: 1rem;
+    padding-top: 1.5rem;
+    margin-top: 2rem;
     border-top: 1px solid var(--border-color);
-}
-
-
-/* Selecciona todos los legend dentro de un fieldset */
-fieldset legend {
-    font-weight: bold;
-    /* Opcional: añade un poco de espacio abajo para que no pegue con los inputs */
-    padding-bottom: 0.5rem; 
-    /* Opcional: aumenta un poco el tamaño si quieres que resalte más */
-    font-size: 1.1rem;
 }
 
 /* ==========================================================================
    5. COMPONENTES: BOTONES
    ========================================================================== */
-   .btn {
+.btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     padding: 12px 28px;
     border-radius: var(--radius-md);
-    
-    /* Tu estilo actual */
     font-size: 0.75rem; 
     font-weight: 900;    
     text-transform: uppercase;
     letter-spacing: 0.1em; 
-    
-    /* Control de tamaño */
-    min-width: 140px; /* Asegura que "Registrar" y "Cancelar" midan lo mismo */
-    
-    /* Interacción y Sombras */
+    min-width: 140px; 
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
-    border: 1px solid transparent; /* Para evitar saltos visuales en botones con borde */
+    border: 1px solid transparent;
     user-select: none;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
 
 .btn:hover { transform: translateY(-2px); }
-
-.btn:active, 
-.btn-primary:active {
-    transform: translateY(0) scale(0.97) !important;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
-}
+.btn:active { transform: translateY(0) scale(0.97) !important; }
 
 .btn-primary { background-color: var(--primary); color: white; }
 .btn-primary:hover { background-color: var(--primary-hover); }
 
-
 .btn-secondary { background-color: var(--secondary); color: white; }
 .btn-secondary:hover { background-color: var(--secondary-hover); }
 
-
-/* Botón Principal (Tu diseño) */
-.btn-primary { 
-    background-color: var(--primary); 
-    color: white; 
-}
-.btn-primary:hover { 
-    background-color: var(--primary-hover); 
-}
-
-/* Botón Secundario (Tu diseño) */
-.btn-secondary { 
-    background-color: var(--secondary); 
-    color: white; 
-}
-.btn-secondary:hover { 
-    background-color: var(--secondary-hover); 
-}
-
-/* 2. Botón Ghost: Para "Cancelar" (Sutil pero con cuerpo de botón) */
 .btn-ghost {
     background-color: transparent;
     color: var(--text-muted);
-    border: 1px solid transparent; /* Mantiene el tamaño igual al primary */
     box-shadow: none;
 }
-
 .btn-ghost:hover {
-    background-color: var(--border-color); /* Usamos tu color de borde como fondo suave */
+    background-color: var(--border-color);
     color: var(--text-main);
-    border-color: transparent;
 }
 
-
-
 /* ==========================================================================
-   6. COMPONENTES: TABLAS & BADGES (Nutrigesica Standard)
+   6. COMPONENTES: TABLAS
    ========================================================================== */
 .ui-table {
     width: 100%;
     border-collapse: collapse;
-    background: white; /* Aseguramos fondo blanco */
+    background: white;
 }
 
 .ui-table td {
     padding: 18px 24px;
-    font-size: 0.92rem;
+    font-size: 1rem;
     line-height: 1.5;
-    border-bottom: 1px solid var(--border-color);
+    font-weight: 400;
     color: var(--text-main);
-    vertical-align: middle;
-}
-
-.ui-table td {
-    padding: 18px 24px;
-
-    font-size: 1rem;          /* 16px base */
-    line-height: 1.5;         /* MUY importante */
-    font-weight: 400;         /* evita light */
-
-    color: #1f2937;           /* gris oscuro sólido */
-    
     border-bottom: 1px solid var(--border-color);
     vertical-align: middle;
-
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
 }
 
-/* El toque final: un hover sutil */
-.ui-table tbody tr:hover {    
-    transition: background 0.2s ease;
+.ui-table tbody tr:hover { background-color: #f8fafc; }
 
-    background-color: #fbfcfd;
-    background-color: #f8fafc;
-}
-
-
-
-
-.table-actions-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 6px;
-}
+.table-actions-group { display: flex; justify-content: flex-end; gap: 6px; }
 
 .table-action {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    
-    /* Botón más pequeño */
     width: 55px; 
     height: 26px;
-    
     font-size: 11px;
     font-weight: 500;
     border-radius: 4px;
-    text-decoration: none;
-    border: none;
-    cursor: pointer;
     transition: all 0.2s;
 }
 
-/* Colores tenues (Pasteles suaves) */
-.table-action-view { 
-    background: #f0f7ff; 
-    color: #5a8dee; 
-}
-.table-action-view:hover { background: #e1effe; }
-
-.table-action-edit { 
-    background: #f8fafc; 
-    color: #64748b; 
-}
-.table-action-edit:hover { background: #f1f5f9; }
-
-.table-action-delete { 
-    background: #fff5f5; 
-    color: #f87171; 
-}
-.table-action-delete:hover { background: #fee2e2; }
-
-
-
-
+.table-action-view { background: #f0f7ff; color: #5a8dee; }
+.table-action-edit { background: #f8fafc; color: #64748b; }
+.table-action-delete { background: #fff5f5; color: #f87171; }
 
 /* ==========================================================================
-   7. NAVEGACIÓN (Desktop-First)
+   7. NAVEGACIÓN & ANIMACIONES
    ========================================================================== */
-/* --- Navegación Base --- */
-#nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
+#nav-menu { display: flex; align-items: center; gap: 2rem; }
 
-/* El dropdown ahora se controla solo por clase .open, no por hover */
 .nav-dropdown-content {
     position: absolute;
     top: 100%;
     right: 0;
     min-width: 200px;
-    background: #1e293b; /* Un tono oscuro sólido */
+    background: #1e293b;
     border-radius: var(--radius-md);
     padding: 0.5rem 0;
-    display: none; /* Se activa con .open */
+    display: none;
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.05);
     z-index: 100;
 }
 
-/* Mostramos el dropdown cuando tiene la clase .open */
-.nav-dropdown.open .nav-dropdown-content {
-    display: block;
+.nav-dropdown.open .nav-dropdown-content { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- MODO MÓVIL (Max-width: 768px) --- */
+main { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* MODO MÓVIL */
 @media (max-width: 768px) {
     #nav-menu {
         display: none; 
         flex-direction: column;
-        align-items: flex-start; /* Alineado a la izquierda, no al medio */
-        gap: 0.5rem;
         width: 100%;
         position: absolute;
         top: 100%;
         left: 0;
         background: var(--secondary);
         padding: 1.5rem 2rem;
-        border-bottom: 2px solid var(--primary);
     }
-
-    #nav-menu.show-menu {
-        display: flex !important;
-    }
-
-    .nav-dropdown {
-        width: 100%;
-    }
-
-    .nav-dropdown-content {
-        position: static; /* En móvil fluye con el resto del menú */
-        width: 100%;
-        background: rgba(0,0,0,0.15);
-        box-shadow: none;
-        margin-top: 0.5rem;
-        padding-left: 1rem; /* Indentación para que se note que es un submenú */
-    }
-}
-
-
-
-
-
-
-
-
-
-/* ==========================================================================
-   8. ANIMACIONES & MEDIA
-   ========================================================================== */
-
-/* 1. Definimos el movimiento */
-@keyframes fadeIn {
-    from { 
-        opacity: 0; 
-        transform: translateY(12px); 
-    }
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-}
-
-/* 2. Lo aplicamos al main automáticamente */
-main {
-    animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* 3. Ajustes para móviles */
-@media (max-width: 768px) {
+    #nav-menu.show-menu { display: flex !important; }
     .ui-card { padding: 1.5rem; }
     .btn { width: 100%; }
-    
-    /* En móvil, una animación más corta se siente más rápida */
-    main { animation-duration: 0.3s; }
 }

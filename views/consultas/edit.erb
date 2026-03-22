@@ -1,0 +1,27 @@
+<div class="mx-auto max-w-6xl">
+    <h3 class="mb-4 text-2xl font-bold text-gray-800">Editar Consulta</h3>
+
+    <div class="ui-card">
+        <form action="<%= url("/consultas/#{@consulta.id_consulta}") %>" method="POST" class="space-y-10">
+            <input type="hidden" name="_method" value="PUT">
+            
+            <input type="hidden" name="consulta[paciente_id]" value="<%= @consulta.paciente_id %>">
+
+            <div class="form-group">
+                <label class="label-style">Paciente</label>
+                <input type="text" 
+                       value="<%= @consulta.paciente.apellidos %>, <%= @consulta.paciente.nombres %>" 
+                       class="input-style bg-gray-50 border-gray-200 text-gray-600 cursor-not-allowed" 
+                       readonly>
+                <p class="text-xs text-gray-400 mt-1">La consulta está vinculada permanentemente a este paciente.</p>
+            </div>
+
+            <%= erb :"consultas/_form" %>
+        
+            <div class="form-footer border-t pt-6">
+                <a href="<%= url('/consultas') %>" class="btn btn-ghost">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

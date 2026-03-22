@@ -31,14 +31,14 @@ end
 
 get '/' do
   if session[:user_id]
-    redirect to('/dashboard')
+    redirect url('/dashboard')
   else
-    redirect to('/login')
+    redirect url('/login')
   end
 end
 
 get '/login' do
-  redirect to('/dashboard') if session[:user_id]
+  redirect url('/dashboard') if session[:user_id]
   erb :login, layout: :layout_base
 end
 
@@ -46,7 +46,7 @@ post '/login' do
   user = User.first(username: params[:username].strip)
   if user && user.password == params[:password]
     session[:user_id] = user.id
-    redirect to('/dashboard')
+    redirect url('/dashboard')
   else
     @error = "Credenciales inválidas"
     erb :login, layout: :layout_base
@@ -59,6 +59,6 @@ get '/logout' do
 end
 
 get '/dashboard' do
-  redirect to('/login') unless session[:user_id]
+  redirect url('/login') unless session[:user_id]
   erb :index
 end

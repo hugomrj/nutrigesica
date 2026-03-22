@@ -51,7 +51,7 @@ end
     
     if @paciente.save
       flash[:success] = "Paciente creado"
-      redirect '/pacientes'
+      redirect url('/pacientes')
     else
       erb :"pacientes/new"
     end
@@ -65,7 +65,23 @@ end
     erb :"pacientes/edit"
   end
   
-  
+  put '/pacientes/:id' do
+    @paciente = Paciente[params[:id]]
+    
+    # 1. Asignamos los nuevos datos al objeto
+    @paciente.set(params[:paciente])
+    
+    # 2. Verificamos si hubo cambios O si simplemente queremos confirmar el éxito
+    if !@paciente.modified? || @paciente.save
+      flash[:success] = "Datos actualizados"
+      redirect url("/pacientes")
+    else
+      flash.now[:error] = "No se pudieron guardar los cambios"
+      erb :"pacientes/edit"
+    end
+  end
+
+
 
 
   # Ver detalle de un paciente
@@ -76,20 +92,7 @@ end
 
 
 
-  # Actualizar los datos de un paciente
-  put '/pacientes/:id' do
-    @paciente = Paciente[params[:id]]
-    
-    # .update es el método "profesional" de Sequel: 
-    # Carga los datos de params[:paciente], valida y guarda en un solo paso.
-    if @paciente.update(params[:paciente])
-      flash[:notice] = "Datos actualizados"
-      redirect "/pacientes"
-    else
-      flash.now[:error] = "No se pudo actualizar"
-      erb :"pacientes/edit"
-    end
-  end
+
 
 
 
@@ -100,10 +103,10 @@ post '/pacientes/:id/eliminar' do
   
   if paciente
     paciente.destroy
-    flash[:notice] = 'Paciente eliminado correctamente.'
+    flash[:success] = 'Paciente eliminado correctamente.'
   else
     flash[:error] = 'Paciente no encontrado.'
   end
   
-  redirect '/pacientes'
+  redirect url('/pacientes')
 end

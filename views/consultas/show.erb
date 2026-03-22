@@ -1,0 +1,93 @@
+<div class="mx-auto max-w-6xl">
+
+    <div class="flex justify-between items-end mb-8">
+        <div>
+            <h2>Consulta: <%= @consulta.paciente.apellidos %>, <%= @consulta.paciente.nombres %></h2>
+            <h6 class="text-[var(--text-muted)]">Registrada el <%= @consulta.fecha %></h6>
+        </div>
+        <div class="flex gap-3">
+            <a href="<%= url('/consultas') %>" class="btn btn-ghost border">Volver</a>
+            <a href="<%= url("/consultas/#{@consulta.id_consulta}/editar") %>" class="btn btn-primary">Editar</a>
+        </div>
+    </div>
+
+    <div class="ui-card">
+        <div class="space-y-12">
+
+            <fieldset>
+                <legend>01. Seguimiento Antropométrico</legend>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="input-group">
+                        <label>Fecha</label>
+                        <p class="font-bold"><%= @consulta.fecha %></p>
+                    </div>
+                    <div class="input-group">
+                        <label>Peso Actual</label>
+                        <p class="text-2xl font-black text-[var(--primary)]"><%= @consulta.peso_actual || '---' %> <small class="text-sm font-normal text-gray-400">kg</small></p>
+                    </div>
+                    <div class="input-group">
+                        <label>Talla</label>
+                        <p class="text-lg font-bold"><%= @consulta.talla || '---' %> <small class="text-sm font-normal text-gray-400">m</small></p>
+                    </div>
+                    <div class="input-group">
+                        <label>Presión Arterial</label>
+                        <p><%= @consulta[:presion_arterial] || 'N/A' %></p>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>02. Motivo y Antecedentes</legend>
+                <div class="space-y-6">
+                    <div class="input-group">
+                        <label>Motivo de la Consulta</label>
+                        <div class="p-4 bg-gray-50 rounded-lg border border-[var(--border-color)] whitespace-pre-line text-gray-800">
+                            <%= @consulta.motivo_consulta %>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="input-group">
+                            <label>Antecedentes de Salud</label>
+                            <p class="text-sm whitespace-pre-line text-gray-700"><%= @consulta.antecedentes_salud || 'Sin registros' %></p>
+                        </div>
+                        <div class="input-group">
+                            <label>Antecedentes Familiares</label>
+                            <p class="text-sm whitespace-pre-line text-gray-700"><%= @consulta.antecedentes_familiares || 'Sin registros' %></p>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>03. Evaluación Alimentaria</legend>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="input-group">
+                        <label>Estilo de Vida / Actividad</label>
+                        <p class="text-sm whitespace-pre-line"><%= @consulta.estilo_vida || 'N/A' %></p>
+                    </div>
+                    <div class="input-group">
+                        <label>Indicadores Dietéticos</label>
+                        <p class="text-sm whitespace-pre-line"><%= @consulta.indicadores_dieteticos || 'N/A' %></p>
+                    </div>
+                    <div class="md:col-span-2 input-group">
+                        <label>Dieta Habitual (Recordatorio 24h)</label>
+                        <div class="p-4 border-l-4 border-[var(--accent)] bg-gray-50 text-sm italic whitespace-pre-line">
+                            <%= @consulta.dieta_habitual || 'No hay registro de dieta' %>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>04. Plan de Acción</legend>
+                <div class="input-group">
+                    <label>Observaciones Generales e Indicaciones</label>
+                    <div class="p-6 bg-[var(--secondary-surface)] text-white rounded-xl shadow-sm whitespace-pre-line font-medium leading-relaxed">
+                        <%= @consulta.observaciones_generales || 'No se registraron indicaciones adicionales.' %>
+                    </div>
+                </div>
+            </fieldset>
+
+        </div>
+    </div>
+</div>

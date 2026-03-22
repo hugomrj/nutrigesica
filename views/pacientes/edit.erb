@@ -3,14 +3,15 @@
     <h3 class="mb-4">Editar Paciente: <%= @paciente.nombres %> <%= @paciente.apellidos %></h3>
 
     <div class="ui-card">
-        <form action="/pacientes/<%= @paciente.id_paciente %>" method="POST" class="space-y-10">
+        <form action="<%= url("/pacientes/#{@paciente.id_paciente}") %>" 
+            method="POST" class="space-y-10">
             
             <input type="hidden" name="_method" value="put">
           
             <%= erb :"pacientes/_form" %>
       
             <div class="form-footer">
-                <a href="/pacientes" class="btn btn-ghost">
+                <a href="<%= url('/pacientes') %>" class="btn btn-ghost">
                     Cancelar
                 </a>
                 <button type="submit" class="btn btn-primary">

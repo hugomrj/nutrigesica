@@ -3,12 +3,12 @@
     <h3 class="mb-4">Nuevo Paciente</h3>
 
     <div class="ui-card">
-    <form action="/pacientes" method="POST" class="space-y-10">
+    <form action="<%= url('/pacientes') %>" method="POST" class="space-y-10">
       
       <%= erb :"pacientes/_form" %>
   
       <div class="form-footer">
-          <a href="/pacientes" class="btn btn-ghost">
+          <a href="<%= url('/pacientes') %>" class="btn btn-ghost">
               Cancelar
           </a>
           <button type="submit" class="btn btn-primary">

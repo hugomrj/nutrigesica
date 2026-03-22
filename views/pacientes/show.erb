@@ -3,10 +3,10 @@
     <div class="flex justify-between items-center mb-6">
         <h3 class="mb-0">Ficha del Paciente: <%= @paciente.nombres %></h3>
         <div class="flex gap-2">
-            <a href="/pacientes" class="btn btn-ghost">
+            <a href="<%= url('/pacientes') %>" class="btn btn-ghost">
                 Volver al listado
             </a>
-            <a href="/pacientes/<%= @paciente.id_paciente %>/editar" class="btn btn-primary">
+            <a href="<%= url("/pacientes/#{@paciente.id_paciente}/editar") %>" class="btn btn-primary">
                 Editar Datos
             </a>
         </div>

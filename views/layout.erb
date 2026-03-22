@@ -29,8 +29,8 @@
         </button>
 
         <div id="nav-menu">
-            <a href="/pacientes" class="text-sm font-black uppercase tracking-widest py-2 hover:text-[var(--accent)]">Pacientes</a>
-            <a href="/consultas" class="text-sm font-black uppercase tracking-widest py-2 hover:text-[var(--accent)]">Consultas</a>
+            <a href="<%= url('/pacientes') %>" class="text-sm font-black uppercase tracking-widest py-2 hover:text-[var(--accent)]">Pacientes</a>
+            <a href="<%= url('/consultas') %>" class="text-sm font-black uppercase tracking-widest py-2 hover:text-[var(--accent)]">Consultas</a>
 
 
 
@@ -40,13 +40,13 @@
                     Sistema <span class="text-[8px] opacity-60">▼</span>
                 </button>
                 <div class="nav-dropdown-content">
-                    <a href="/config" class="block px-4 py-3 text-xs font-bold uppercase hover:bg-white/5 hover:text-[var(--accent)]">Configuración</a>
-                    <a href="/usuarios" class="block px-4 py-3 text-xs font-bold uppercase hover:bg-white/5 hover:text-[var(--accent)]">Usuarios</a>
+                    <a href="<%= url('/config') %>" class="block px-4 py-3 text-xs font-bold uppercase hover:bg-white/5 hover:text-[var(--accent)]">Configuración</a>
+                    <a href="<%= url('/usuarios') %>" class="block px-4 py-3 text-xs font-bold uppercase hover:bg-white/5 hover:text-[var(--accent)]">Usuarios</a>
                 </div>
             </div>
             -->
 
-            <a href="/logout" class="text-sm font-black uppercase tracking-widest py-2 text-red-400 hover:text-red-300">
+            <a href="<%= url('/logout') %>" class="text-sm font-black uppercase tracking-widest py-2 text-red-400 hover:text-red-300">
                 Salir
             </a>
         </div>
@@ -55,8 +55,9 @@
 
 
 <% if flash[:error] %>
-  <div class="flex items-center p-4 mb-6 text-red-800 border-t-4 border-red-300 bg-red-50 rounded-lg shadow-sm" role="alert">
-    <svg class="flex-shrink-0 w-4 h-4 text-red-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+  <div class="flex items-center p-4 mb-6 border-t-4 bg-red-50 rounded-lg shadow-sm" 
+       style="color: var(--error); border-color: var(--error);" role="alert">
+    <svg class="flex-shrink-0 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
     </svg>
     <div class="ms-3 text-sm font-medium">
@@ -65,18 +66,17 @@
   </div>
 <% end %>
 
-<% if flash[:notice] %>
-  <div class="flex items-center p-4 mb-6 text-emerald-800 border-t-4 border-emerald-300 bg-emerald-50 rounded-lg shadow-sm" role="alert">
-    <svg class="flex-shrink-0 w-4 h-4 text-emerald-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+<% if flash[:success] %>
+  <div class="flex items-center p-4 mb-6 border-t-4 bg-green-50 rounded-lg shadow-sm" 
+       style="color: var(--success); border-color: var(--success);" role="alert">
+    <svg class="flex-shrink-0 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
     </svg>
     <div class="ms-3 text-sm font-medium">
-      <%= flash[:notice] %>
+      <%= flash[:success] %>
     </div>
   </div>
 <% end %>
-
-
 
 
 

@@ -3,7 +3,7 @@
     <section>
 
         <fieldset class="space-y-6">            
-            <legend class="text-[var(--tertiary)]">01. Seguimiento Antropométrico</legend>
+            <legend>01. Seguimiento Antropométrico</legend>
             
             <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
                 <div class="md:col-span-3 input-group">
@@ -20,7 +20,8 @@
                 </div>
                 <div class="md:col-span-3 input-group">
                     <label>Presión Arterial</label>
-                    <input type="text" name="consulta[presion_arterial]" value="<%= @consulta[:presion_arterial] %>" class="input-control" placeholder="120/80">
+                    <input type="text" name="consulta[presion_arterial]" 
+                        value="<%= @consulta[:presion_arterial] %>" class="input-control">
                 </div>
             </div>
 
@@ -32,7 +33,7 @@
     <section>
 
         <fieldset class="space-y-6">
-            <legend class="text-[var(--tertiary)]">02. Motivo y Antecedentes</legend>
+            <legend>02. Motivo y Antecedentes</legend>
 
             <div class="grid grid-cols-1 gap-6">
                 <div class="input-group">
@@ -58,7 +59,7 @@
     <section>
 
         <fieldset class="space-y-6">
-            <legend class="text-[var(--tertiary)]">03. Evaluación Alimentaria</legend>
+            <legend>03. Evaluación Alimentaria</legend>
        
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="input-group">
@@ -80,7 +81,7 @@
     <section>
 
         <fieldset class="space-y-6">
-            <legend class="text-[var(--tertiary)]">04. Plan de Acción</legend>
+            <legend>04. Plan de Acción</legend>
 
 
             <div class="input-group">
